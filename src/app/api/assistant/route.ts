@@ -235,33 +235,99 @@ async function tryOpenRouter(systemPrompt: string, messages: ChatMessage[]): Pro
   throw lastErr ?? new Error("Todos los modelos de fallback de OpenRouter fallaron");
 }
 
+const AGENT_IDS = Object.keys(SYSTEM_PROMPTS) as AgentId[];
+const MAX_MESSAGES = 10;
+const MAX_MESSAGE_CHARS = 1000;
+const MAX_CONTEXT_CHARS = 2000;
+
+// Rate limit en memoria por IP. En serverless cada instancia tiene su propio
+// contador, así que es una protección de mejor esfuerzo contra abuso de la
+// cuota gratuita, no un límite estricto.
+const RATE_LIMIT_MAX = 20;
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const hits = new Map<string, { count: number; resetAt: number }>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  if (hits.size > 5000) {
+    for (const [key, v] of hits) if (v.resetAt <= now) hits.delete(key);
+  }
+  const entry = hits.get(ip);
+  if (!entry || entry.resetAt <= now) {
+    hits.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+  entry.count += 1;
+  return entry.count > RATE_LIMIT_MAX;
+}
+
+function parseMessages(raw: unknown): ChatMessage[] | null {
+  if (!Array.isArray(raw) || raw.length === 0) return null;
+  const parsed: ChatMessage[] = [];
+  for (const m of raw.slice(-MAX_MESSAGES)) {
+    if (
+      !m ||
+      typeof m !== "object" ||
+      (m.role !== "user" && m.role !== "assistant") ||
+      typeof m.content !== "string" ||
+      !m.content.trim()
+    ) {
+      return null;
+    }
+    parsed.push({ role: m.role, content: m.content.slice(0, MAX_MESSAGE_CHARS) });
+  }
+  // Gemini y OpenRouter esperan que la conversación termine con un mensaje del usuario.
+  return parsed[parsed.length - 1].role === "user" ? parsed : null;
+}
+
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const agentId: AgentId = body.agentId ?? "orquestador";
-    const messages: ChatMessage[] = body.messages ?? [];
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
+    if (isRateLimited(ip)) {
+      return NextResponse.json(
+        { error: "Demasiados mensajes, esperá un minuto e intentá de nuevo." },
+        { status: 429 }
+      );
+    }
+
+    let body: unknown;
+    try {
+      body = await req.json();
+    } catch {
+      return NextResponse.json({ error: "JSON inválido" }, { status: 400 });
+    }
+    if (!body || typeof body !== "object") {
+      return NextResponse.json({ error: "Body inválido" }, { status: 400 });
+    }
+    const input = body as Record<string, unknown>;
+
+    const agentId: AgentId = AGENT_IDS.includes(input.agentId as AgentId)
+      ? (input.agentId as AgentId)
+      : "orquestador";
+    const messages = parseMessages(input.messages);
     // Resumen breve de contexto acumulado en la conversación (ej: datos que
     // el usuario ya dio en otro agente), para que el nuevo agente no repita
     // preguntas ya respondidas.
-    const contextSummary: string | undefined = body.contextSummary;
+    const contextSummary =
+      typeof input.contextSummary === "string"
+        ? input.contextSummary.slice(0, MAX_CONTEXT_CHARS)
+        : undefined;
 
-    if (!Array.isArray(messages) || messages.length === 0) {
-      return NextResponse.json({ error: "messages requerido" }, { status: 400 });
+    if (!messages) {
+      return NextResponse.json({ error: "messages inválido" }, { status: 400 });
     }
 
-    let systemPrompt = SYSTEM_PROMPTS[agentId] ?? SYSTEM_PROMPTS.orquestador;
+    let systemPrompt = SYSTEM_PROMPTS[agentId];
     if (contextSummary) {
       systemPrompt += `\n\nContexto previo de esta conversación (datos que el usuario ya mencionó, no se los vuelvas a pedir si ya los tenés): ${contextSummary}`;
     }
-
-    const recentMessages = messages.slice(-10);
 
     let raw: string | null = null;
     let lastError: unknown = null;
 
     // 1) Intento primario: Gemini (capa gratuita generosa, sin tarjeta).
     try {
-      raw = await tryGemini(systemPrompt, recentMessages);
+      raw = await tryGemini(systemPrompt, messages);
     } catch (err) {
       lastError = err;
       console.warn("Gemini falló, probando fallback OpenRouter:", err);
@@ -271,7 +337,7 @@ export async function POST(req: NextRequest) {
     //    por rate limit, timeout, falta de key, etc.
     if (!raw) {
       try {
-        raw = await tryOpenRouter(systemPrompt, recentMessages);
+        raw = await tryOpenRouter(systemPrompt, messages);
       } catch (err) {
         lastError = err;
         console.error("OpenRouter también falló:", err);
@@ -280,7 +346,7 @@ export async function POST(req: NextRequest) {
 
     if (!raw) {
       console.error("Ambos proveedores fallaron:", lastError);
-      const fallbackReply = LAST_RESORT_REPLIES[agentId] ?? LAST_RESORT_REPLIES.orquestador;
+      const fallbackReply = LAST_RESORT_REPLIES[agentId];
       return NextResponse.json({ content: fallbackReply, handoff: null, action: null });
     }
 
