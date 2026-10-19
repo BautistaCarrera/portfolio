@@ -7,6 +7,7 @@ import { ArrowUp } from "lucide-react";
 export default function ScrollProgress() {
   const [progress, setProgress] = useState(0);
   const [showTop, setShowTop] = useState(false);
+  const [overAssistant, setOverAssistant] = useState(false);
 
   useEffect(() => {
     function onScroll() {
@@ -20,6 +21,19 @@ export default function ScrollProgress() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // En celular el botón taparía el botón de enviar del chat, así que se
+  // oculta mientras la sección del asistente está en pantalla.
+  useEffect(() => {
+    const el = document.getElementById("assistant");
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setOverAssistant(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -42,7 +56,9 @@ export default function ScrollProgress() {
             transition={{ duration: 0.2 }}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             aria-label="Volver arriba"
-            className="fixed bottom-6 right-6 z-50 flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--card)]/90 text-[var(--foreground)] shadow-lg backdrop-blur transition-colors hover:border-[var(--accent)]/50 hover:text-[var(--accent)]"
+            className={`fixed bottom-6 right-6 z-50 flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--card)]/90 text-[var(--foreground)] shadow-lg backdrop-blur transition-colors hover:border-[var(--accent)]/50 hover:text-[var(--accent)] ${
+              overAssistant ? "max-sm:hidden" : ""
+            }`}
           >
             <ArrowUp size={16} />
           </motion.button>
