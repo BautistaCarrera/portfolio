@@ -6,12 +6,26 @@ export const maxDuration = 30;
 
 // Timeouts: sin esto un proveedor colgado consume todo el tiempo de la
 // función y el usuario ve un error de timeout en vez del mensaje de respaldo.
-const GEMINI_TIMEOUT_MS = 12_000;
-const OPENROUTER_TIMEOUT_MS = 8_000;
-// Presupuesto total para el fallback de OpenRouter (cascada de modelos).
-const OPENROUTER_TOTAL_BUDGET_MS = 8_000;
+// Peor caso total: 6 (Gemini) + ~6 (gratis) + 8 (pago) = 20s < maxDuration.
+const GEMINI_TIMEOUT_MS = 6_000;
+const FREE_TIMEOUT_MS = 3_000;
+// Tiempo máximo para empezar un nuevo modelo gratis de la cascada.
+const FREE_TOTAL_BUDGET_MS = 3_000;
+const PAID_TIMEOUT_MS = 8_000;
 
-const GEMINI_MODEL = "gemini-3.6-flash";
+// Último escalón, de pago pero baratísimo (~US$0.0002 por consulta, modelo
+// sin razonamiento, buen español). Solo se llama si Gemini y todos los modelos
+// gratis fallaron, así que en la práctica casi no se usa. Conviene fijar un
+// límite de gasto en la clave de OpenRouter.
+const PAID_FALLBACK_MODEL = "mistralai/mistral-small-3.2-24b-instruct";
+
+// Cada modelo de Gemini tiene su propia cuota gratuita diaria (gemini-3.6-flash
+// solo permite ~20 requests/día), así que se prueban en orden. El lite es el
+// más rápido y tiene cupo propio.
+const GEMINI_MODELS = ["gemini-3.1-flash-lite", "gemini-3.6-flash"];
+// Si un modelo agotó su cuota diaria, se saltea unos minutos (por instancia).
+const GEMINI_COOLDOWN_MS = 10 * 60_000;
+const geminiCooldown = new Map<string, number>();
 // Cadena de modelos 100% gratuitos en OpenRouter, probados en orden como
 // fallback si Gemini falla (rate limit, timeout, error de red, etc.).
 // Los modelos gratis de OpenRouter son de pool compartido entre todos los
@@ -125,7 +139,7 @@ interface ChatMessage {
   content: string;
 }
 
-// Última red de seguridad: si Gemini y los modelos de fallback de
+// Última red de seguridad: si Gemini, los modelos gratis y el de pago de
 // OpenRouter fallan todos a la vez (poco probable, pero servicios gratuitos
 // de terceros no garantizan 100% uptime), respondemos con esto en vez de
 // un error crudo, para que el chat nunca se sienta "roto".
@@ -172,20 +186,24 @@ async function tryGemini(systemPrompt: string, messages: ChatMessage[]): Promise
     parts: [{ text: m.content }],
   }));
 
-  // Reintento corto en caso de 429 (rate limit) transitorio: la capa
-  // gratuita de Gemini limita requests por minuto, y a veces se libera
-  // en un par de segundos.
+  // Presupuesto total de Gemini: cada modelo se prueba mientras quede tiempo.
+  const startedAt = Date.now();
   let lastErr: unknown = null;
-  for (let attempt = 0; attempt < 2; attempt++) {
+
+  for (const model of GEMINI_MODELS) {
+    const remaining = GEMINI_TIMEOUT_MS - (Date.now() - startedAt);
+    if (remaining < 1_500) break;
+    if ((geminiCooldown.get(model) ?? 0) > Date.now()) continue;
+
     try {
       const response = await ai.models.generateContent({
-        model: GEMINI_MODEL,
+        model,
         contents,
         config: {
           systemInstruction: systemPrompt,
           temperature: 0.6,
           maxOutputTokens: 700,
-          abortSignal: AbortSignal.timeout(GEMINI_TIMEOUT_MS),
+          abortSignal: AbortSignal.timeout(remaining),
           // Gemini 3.x no soporta desactivar el thinking del todo
           // (thinkingBudget no aplica en esta familia); "low" minimiza el
           // consumo de tokens de razonamiento para dejar presupuesto real
@@ -199,58 +217,83 @@ async function tryGemini(systemPrompt: string, messages: ChatMessage[]): Promise
       return text;
     } catch (err) {
       lastErr = err;
-      const isRateLimit = err instanceof Error && /429|RESOURCE_EXHAUSTED/i.test(err.message);
-      if (isRateLimit && attempt === 0) {
-        await new Promise((r) => setTimeout(r, 1200));
-        continue;
+      const msg = err instanceof Error ? err.message : String(err);
+      // Cuota agotada (diaria o por minuto): no se reintenta, se pasa al
+      // siguiente modelo y este se saltea un rato.
+      if (/429|RESOURCE_EXHAUSTED/i.test(msg)) {
+        geminiCooldown.set(model, Date.now() + GEMINI_COOLDOWN_MS);
       }
-      break;
+      console.warn(`Gemini modelo "${model}" falló, probando siguiente:`, err);
     }
   }
-  throw lastErr ?? new Error("Gemini falló");
+  throw lastErr ?? new Error("Gemini sin modelos disponibles (cuota agotada)");
 }
 
-async function tryOpenRouter(systemPrompt: string, messages: ChatMessage[]): Promise<string> {
+async function callOpenRouter(
+  model: string,
+  systemPrompt: string,
+  messages: ChatMessage[],
+  timeoutMs: number
+): Promise<string> {
   const apiKey = process.env.OPENROUTER_API_KEY;
   if (!apiKey) throw new Error("OPENROUTER_API_KEY no configurada");
 
+  const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+    method: "POST",
+    signal: AbortSignal.timeout(timeoutMs),
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model,
+      temperature: 0.6,
+      max_tokens: 400,
+      messages: [{ role: "system", content: systemPrompt }, ...messages],
+    }),
+  });
+
+  if (!res.ok) {
+    const errText = await res.text().catch(() => "");
+    throw new Error(`OpenRouter (${model}) error ${res.status}: ${errText}`);
+  }
+
+  const data = await res.json();
+  const text = data.choices?.[0]?.message?.content?.trim();
+  if (!text) throw new Error(`Respuesta vacía de OpenRouter (${model})`);
+  return text;
+}
+
+// Cascada de modelos gratuitos.
+async function tryOpenRouterFree(systemPrompt: string, messages: ChatMessage[]): Promise<string> {
   let lastErr: unknown = null;
   const startedAt = Date.now();
 
   for (const model of OPENROUTER_FALLBACK_MODELS) {
-    if (Date.now() - startedAt > OPENROUTER_TOTAL_BUDGET_MS) break;
+    if (Date.now() - startedAt > FREE_TOTAL_BUDGET_MS) break;
     try {
-      const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-        method: "POST",
-        signal: AbortSignal.timeout(OPENROUTER_TIMEOUT_MS),
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model,
-          temperature: 0.6,
-          max_tokens: 400,
-          messages: [{ role: "system", content: systemPrompt }, ...messages],
-        }),
-      });
-
-      if (!res.ok) {
-        const errText = await res.text().catch(() => "");
-        throw new Error(`OpenRouter (${model}) error ${res.status}: ${errText}`);
-      }
-
-      const data = await res.json();
-      const text = data.choices?.[0]?.message?.content?.trim();
-      if (!text) throw new Error(`Respuesta vacía de OpenRouter (${model})`);
-      return text;
+      return await callOpenRouter(model, systemPrompt, messages, FREE_TIMEOUT_MS);
     } catch (err) {
       lastErr = err;
       console.warn(`Fallback OpenRouter modelo "${model}" falló, probando siguiente:`, err);
     }
   }
 
-  throw lastErr ?? new Error("Todos los modelos de fallback de OpenRouter fallaron");
+  throw lastErr ?? new Error("Todos los modelos gratuitos de OpenRouter fallaron");
+}
+
+// Categoría corta del error, para diagnóstico (sin datos sensibles).
+function failureCategory(err: unknown): string {
+  const msg = err instanceof Error ? `${err.name} ${err.message}` : String(err);
+  if (/no configurada/i.test(msg)) return "no-key";
+  if (/abort|timeout/i.test(msg)) return "timeout";
+  if (/429|RESOURCE_EXHAUSTED/i.test(msg)) return "429";
+  if (/503|UNAVAILABLE/i.test(msg)) return "503";
+  if (/403|PERMISSION_DENIED|location/i.test(msg)) return "403";
+  if (/401|API key|UNAUTHENTICATED/i.test(msg)) return "401";
+  if (/400|FAILED_PRECONDITION|INVALID_ARGUMENT/i.test(msg)) return "400";
+  if (/vac[ií]a/i.test(msg)) return "empty";
+  return "error";
 }
 
 const AGENT_IDS = Object.keys(SYSTEM_PROMPTS) as AgentId[];
@@ -342,35 +385,57 @@ export async function POST(req: NextRequest) {
 
     let raw: string | null = null;
     let lastError: unknown = null;
+    // Diagnóstico: quién respondió y por qué falló Gemini (headers de respuesta).
+    let provider = "none";
+    let geminiFail: string | null = null;
 
-    // 1) Intento primario: Gemini (capa gratuita generosa, sin tarjeta).
+    // 1) Intento primario: Gemini (capa gratuita con cuotas diarias chicas por modelo).
     try {
       raw = await tryGemini(systemPrompt, messages);
+      provider = "gemini";
     } catch (err) {
       lastError = err;
+      geminiFail = failureCategory(err);
       console.warn("Gemini falló, probando fallback OpenRouter:", err);
     }
 
-    // 2) Fallback automático: OpenRouter (modelo gratuito), si Gemini falla
-    //    por rate limit, timeout, falta de key, etc.
+    // 2) Fallback: cascada de modelos gratuitos de OpenRouter.
     if (!raw) {
       try {
-        raw = await tryOpenRouter(systemPrompt, messages);
+        raw = await tryOpenRouterFree(systemPrompt, messages);
+        provider = "openrouter-free";
       } catch (err) {
         lastError = err;
-        console.error("OpenRouter también falló:", err);
+        console.warn("Modelos gratuitos de OpenRouter fallaron, probando el de pago:", err);
       }
     }
 
+    // 3) Último escalón: modelo barato de pago, con su propio tiempo garantizado.
     if (!raw) {
-      console.error("Ambos proveedores fallaron:", lastError);
+      try {
+        raw = await callOpenRouter(PAID_FALLBACK_MODEL, systemPrompt, messages, PAID_TIMEOUT_MS);
+        provider = "openrouter-paid";
+      } catch (err) {
+        lastError = err;
+        console.error("El modelo de pago también falló:", err);
+      }
+    }
+
+    const headers: Record<string, string> = { "x-provider": provider };
+    if (geminiFail) headers["x-gemini-fail"] = geminiFail;
+
+    if (!raw) {
+      console.error("Todos los proveedores fallaron:", lastError);
       const fallbackReply = LAST_RESORT_REPLIES[agentId];
-      return NextResponse.json({ content: fallbackReply, handoff: null, action: null });
+      return NextResponse.json(
+        { content: fallbackReply, handoff: null, action: null },
+        { headers }
+      );
     }
 
     const { content: withoutHandoff, handoff } = extractHandoff(raw);
     const { content, action } = extractAction(withoutHandoff);
-    return NextResponse.json({ content, handoff, action });
+    return NextResponse.json({ content, handoff, action }, { headers });
   } catch (err) {
     console.error("assistant api error", err);
     return NextResponse.json(
