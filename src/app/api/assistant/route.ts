@@ -6,10 +6,10 @@ export const maxDuration = 30;
 
 // Timeouts: sin esto un proveedor colgado consume todo el tiempo de la
 // función y el usuario ve un error de timeout en vez del mensaje de respaldo.
-const GEMINI_TIMEOUT_MS = 6_000;
-const OPENROUTER_TIMEOUT_MS = 5_000;
+const GEMINI_TIMEOUT_MS = 12_000;
+const OPENROUTER_TIMEOUT_MS = 8_000;
 // Presupuesto total para el fallback de OpenRouter (cascada de modelos).
-const OPENROUTER_TOTAL_BUDGET_MS = 10_000;
+const OPENROUTER_TOTAL_BUDGET_MS = 8_000;
 
 const GEMINI_MODEL = "gemini-3.6-flash";
 // Cadena de modelos 100% gratuitos en OpenRouter, probados en orden como
@@ -18,13 +18,16 @@ const GEMINI_MODEL = "gemini-3.6-flash";
 // usuarios y se saturan seguido — por eso probamos varios de proveedores
 // distintos en cascada, para bajar la chance de que todos estén caídos
 // al mismo tiempo.
+// Verificados con llamadas reales (nov 2026). Se evitaron los modelos de
+// razonamiento (nemotron lightning/nano, flint): con max_tokens bajo gastan
+// todo el presupuesto pensando y devuelven contenido vacío. openrouter/free
+// es un router que elige solo un modelo gratis disponible: último recurso.
+// Revisar esta lista de vez en cuando: los ":free" cambian seguido.
 const OPENROUTER_FALLBACK_MODELS = [
   "google/gemma-4-31b-it:free",
-  "z-ai/glm-5.2:free",
-  "minimax/minimax-m2.7:free",
-  "nvidia/nemotron-3-super-120b-a12b:free",
-  "minimax/minimax-m3:free",
+  "nvidia/nemotron-3-ultra-550b-a55b:free",
   "google/gemma-4-26b-a4b-it:free",
+  "openrouter/free",
 ];
 
 type AgentId =
@@ -122,7 +125,7 @@ interface ChatMessage {
   content: string;
 }
 
-// Última red de seguridad: si Gemini y los 6 modelos de fallback de
+// Última red de seguridad: si Gemini y los modelos de fallback de
 // OpenRouter fallan todos a la vez (poco probable, pero servicios gratuitos
 // de terceros no garantizan 100% uptime), respondemos con esto en vez de
 // un error crudo, para que el chat nunca se sienta "roto".
