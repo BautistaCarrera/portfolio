@@ -2,6 +2,14 @@ import { GoogleGenAI, ThinkingLevel } from "@google/genai";
 import { NextRequest, NextResponse } from "next/server";
 
 export const runtime = "nodejs";
+export const maxDuration = 30;
+
+// Timeouts: sin esto un proveedor colgado consume todo el tiempo de la
+// función y el usuario ve un error de timeout en vez del mensaje de respaldo.
+const GEMINI_TIMEOUT_MS = 6_000;
+const OPENROUTER_TIMEOUT_MS = 5_000;
+// Presupuesto total para el fallback de OpenRouter (cascada de modelos).
+const OPENROUTER_TOTAL_BUDGET_MS = 10_000;
 
 const GEMINI_MODEL = "gemini-3.6-flash";
 // Cadena de modelos 100% gratuitos en OpenRouter, probados en orden como
@@ -133,17 +141,20 @@ const LAST_RESORT_REPLIES: Record<AgentId, string> = {
     "El modelo está con alta demanda en este momento (pasa con las capas gratuitas). Probá de nuevo en unos segundos.",
 };
 
+// Los modelos a veces ponen las etiquetas en cualquier lado del texto, así que
+// se buscan en todo el mensaje y se quitan siempre, para que nunca se filtren
+// al usuario. Se usa la última etiqueta de handoff y la primera de acción.
 function extractHandoff(raw: string): { content: string; handoff: string | null } {
-  const handoffMatch = raw.match(/\[\[HANDOFF:(\w+)\]\]\s*$/);
-  const handoff = handoffMatch ? handoffMatch[1] : null;
-  const content = raw.replace(/\[\[HANDOFF:\w+\]\]\s*$/, "").trim();
+  const matches = [...raw.matchAll(/\[\[HANDOFF:\s*(\w+)\s*\]\]/g)];
+  const handoff = matches.length ? matches[matches.length - 1][1] : null;
+  const content = raw.replace(/\s*\[\[HANDOFF:[^\]]*\]\]/g, "").trim();
   return { content, handoff };
 }
 
 function extractAction(raw: string): { content: string; action: string | null } {
-  const actionMatch = raw.match(/^\s*\[\[ACTION:([^\]]+)\]\]\s*/);
+  const actionMatch = raw.match(/\[\[ACTION:([^\]]+)\]\]/);
   const action = actionMatch ? actionMatch[1].trim() : null;
-  const content = raw.replace(/^\s*\[\[ACTION:[^\]]+\]\]\s*/, "").trim();
+  const content = raw.replace(/\s*\[\[ACTION:[^\]]*\]\]\s*/g, " ").trim();
   return { content, action };
 }
 
@@ -171,6 +182,7 @@ async function tryGemini(systemPrompt: string, messages: ChatMessage[]): Promise
           systemInstruction: systemPrompt,
           temperature: 0.6,
           maxOutputTokens: 700,
+          abortSignal: AbortSignal.timeout(GEMINI_TIMEOUT_MS),
           // Gemini 3.x no soporta desactivar el thinking del todo
           // (thinkingBudget no aplica en esta familia); "low" minimiza el
           // consumo de tokens de razonamiento para dejar presupuesto real
@@ -200,11 +212,14 @@ async function tryOpenRouter(systemPrompt: string, messages: ChatMessage[]): Pro
   if (!apiKey) throw new Error("OPENROUTER_API_KEY no configurada");
 
   let lastErr: unknown = null;
+  const startedAt = Date.now();
 
   for (const model of OPENROUTER_FALLBACK_MODELS) {
+    if (Date.now() - startedAt > OPENROUTER_TOTAL_BUDGET_MS) break;
     try {
       const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
         method: "POST",
+        signal: AbortSignal.timeout(OPENROUTER_TIMEOUT_MS),
         headers: {
           Authorization: `Bearer ${apiKey}`,
           "Content-Type": "application/json",
@@ -310,7 +325,7 @@ export async function POST(req: NextRequest) {
     // preguntas ya respondidas.
     const contextSummary =
       typeof input.contextSummary === "string"
-        ? input.contextSummary.slice(0, MAX_CONTEXT_CHARS)
+        ? input.contextSummary.slice(-MAX_CONTEXT_CHARS) // lo más reciente
         : undefined;
 
     if (!messages) {

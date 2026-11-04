@@ -169,7 +169,11 @@ export default function AIAssistant() {
       const data: { content: string; handoff: AgentId | null; action: string | null } =
         await res.json();
 
-      if (data.handoff && data.handoff !== activeAgent && AGENTS[data.handoff]) {
+      if (
+        data.handoff &&
+        data.handoff !== activeAgent &&
+        Object.hasOwn(AGENTS, data.handoff)
+      ) {
         const targetAgent = AGENTS[data.handoff];
         setMessages((m) => [
           ...m,
