@@ -123,11 +123,15 @@ export default function AIAssistant() {
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // Scrollea solo el contenedor del chat. Antes se usaba scrollIntoView, que
+  // además arrastraba la página entera hasta el chat al cargar el sitio.
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    const el = scrollRef.current;
+    if (!el) return;
+    el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
   }, [messages, typing]);
 
   async function send(text: string) {
@@ -234,7 +238,13 @@ export default function AIAssistant() {
         <span className="ml-auto h-1.5 w-1.5 rounded-full bg-[var(--accent)] pulse-node" />
       </div>
 
-      <div className="flex h-96 flex-col gap-4 overflow-y-auto px-4 py-5">
+      <div
+        ref={scrollRef}
+        role="log"
+        aria-live="polite"
+        aria-label="Conversación con el asistente"
+        className="flex h-96 flex-col gap-4 overflow-y-auto px-4 py-5"
+      >
         <AnimatePresence initial={false}>
           {messages.map((m, i) => {
             if (m.role === "system") {
@@ -339,7 +349,6 @@ export default function AIAssistant() {
           </div>
         )}
 
-        <div ref={bottomRef} />
       </div>
 
       <div className="border-t border-[var(--border)] px-4 py-3">
@@ -365,6 +374,8 @@ export default function AIAssistant() {
             ref={inputRef}
             id="assistant-chat-input"
             name="message"
+            aria-label="Mensaje para el asistente"
+            maxLength={1000}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={
@@ -372,7 +383,7 @@ export default function AIAssistant() {
                 ? "Escribí un mensaje..."
                 : `Escribile a ${activeDef.name}...`
             }
-            className="flex-1 rounded-full border border-[var(--border)] bg-[var(--background)] px-4 py-2 text-sm text-[var(--foreground)] outline-none placeholder:text-[var(--muted)] focus:border-[var(--accent)]/50"
+            className="flex-1 rounded-full border border-[var(--border)] bg-[var(--background)] px-4 py-2 text-sm text-[var(--foreground)] outline-none placeholder:text-[var(--muted)] focus:border-[var(--accent)]/50 focus-visible:ring-2 focus-visible:ring-[var(--accent)]/60"
           />
           <button
             type="submit"

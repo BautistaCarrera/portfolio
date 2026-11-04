@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Award, Check, X } from "lucide-react";
 import Image from "next/image";
@@ -21,6 +21,28 @@ const CERTIFICATES: Certificate[] = [
 
 export default function Certifications() {
   const [selected, setSelected] = useState<Certificate | null>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+
+  // Modal accesible: Esc cierra, el foco entra al modal, no se pierde con Tab
+  // (queda en el botón de cerrar) y vuelve al botón que lo abrió.
+  useEffect(() => {
+    if (!selected) return;
+    closeRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelected(null);
+      if (e.key === "Tab") {
+        e.preventDefault();
+        closeRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    const trigger = triggerRef.current;
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      trigger?.focus();
+    };
+  }, [selected]);
 
   return (
     <section id="certifications" className="mx-auto max-w-6xl px-6 py-28">
@@ -49,7 +71,10 @@ export default function Certifications() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.4, delay: i * 0.06 }}
-            onClick={() => setSelected(cert)}
+            onClick={(e) => {
+              triggerRef.current = e.currentTarget;
+              setSelected(cert);
+            }}
             className="group flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)]/60 text-left transition-colors hover:border-[var(--accent)]/40"
           >
             <div className="relative aspect-[4/3] w-full overflow-hidden border-b border-[var(--border)] bg-[var(--background-alt)]">
@@ -83,6 +108,9 @@ export default function Certifications() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelected(null)}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Certificado — ${selected.title}`}
             className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-6 backdrop-blur-sm"
           >
             <motion.div
@@ -93,6 +121,7 @@ export default function Certifications() {
               className="relative h-[75vh] w-full max-w-3xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)]"
             >
               <button
+                ref={closeRef}
                 onClick={() => setSelected(null)}
                 aria-label="Cerrar"
                 className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-[var(--background)]/80 text-[var(--foreground)] hover:text-[var(--accent)]"

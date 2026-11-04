@@ -88,6 +88,9 @@ export default function AgentNetwork() {
     }
 
     draw();
+    // Con "reducir movimiento" se deja un solo cuadro estático.
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reduceMotion.matches) cancelAnimationFrame(raf);
 
     const onResize = () => setSize();
     window.addEventListener("resize", onResize);
