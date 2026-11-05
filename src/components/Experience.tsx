@@ -37,7 +37,7 @@ const items = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="mx-auto max-w-6xl px-6 py-28">
+    <section id="experience" className="scroll-mt-16 mx-auto max-w-6xl px-6 py-20 md:py-24">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

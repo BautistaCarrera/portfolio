@@ -22,7 +22,7 @@ export default function Hero() {
         <div className="mb-6 flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)]/80 px-4 py-1.5 font-mono-code text-xs text-[var(--muted)]">
           <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)] pulse-node" />
           <Terminal size={12} className="text-[var(--accent)]" />
-          Available for new opportunities
+          Disponible para nuevos proyectos
         </div>
 
         <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl">

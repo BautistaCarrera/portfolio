@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const links = [
+  { href: "#approach", label: "Enfoque" },
   { href: "#projects", label: "Proyectos" },
   { href: "#assistant", label: "Asistente" },
   { href: "#skills", label: "Skills" },
@@ -14,6 +15,23 @@ const links = [
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("");
+
+  // Resalta el link de la sección que está en pantalla.
+  useEffect(() => {
+    const ids = [...links.map((l) => l.href.slice(1)), "contact"];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) if (e.isIntersecting) setActive(e.target.id);
+      },
+      { rootMargin: "-40% 0px -55% 0px" }
+    );
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
 
   // Esc cierra el menú móvil.
   useEffect(() => {
@@ -38,12 +56,15 @@ export default function Nav() {
           <span className="cursor-blink text-[var(--accent)]">_</span>
         </a>
 
-        <ul className="hidden gap-8 text-sm text-[var(--muted)] md:flex">
+        <ul className="hidden gap-5 text-sm lg:gap-8 text-[var(--muted)] lg:flex">
           {links.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
-                className="transition-colors hover:text-[var(--accent)]"
+                aria-current={active === l.href.slice(1) ? "true" : undefined}
+                className={`transition-colors hover:text-[var(--accent)] ${
+                  active === l.href.slice(1) ? "text-[var(--accent)]" : ""
+                }`}
               >
                 {l.label}
               </a>
@@ -51,7 +72,7 @@ export default function Nav() {
           ))}
         </ul>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-3 lg:flex">
           <a
             href="#contact"
             className="rounded-full border border-[var(--accent)]/40 inline-flex min-h-9 items-center px-4 text-xs font-medium text-[var(--accent)] transition-colors hover:bg-[var(--accent)]/10"
@@ -65,7 +86,7 @@ export default function Nav() {
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={open}
           aria-controls="mobile-menu"
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border)] text-[var(--foreground)] md:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border)] text-[var(--foreground)] lg:hidden"
         >
           {open ? <X size={16} /> : <Menu size={16} />}
         </button>
@@ -79,7 +100,7 @@ export default function Nav() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="overflow-hidden border-t border-[var(--border)]/60 bg-[var(--background)]/95 backdrop-blur-md md:hidden"
+            className="overflow-hidden border-t border-[var(--border)]/60 bg-[var(--background)]/95 backdrop-blur-md lg:hidden"
           >
             <ul className="flex flex-col gap-1 px-6 py-4 text-sm text-[var(--muted)]">
               {links.map((l) => (

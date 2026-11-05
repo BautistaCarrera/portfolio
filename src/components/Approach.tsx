@@ -20,7 +20,7 @@ const agents = [
 
 export default function Approach() {
   return (
-    <section className="mx-auto max-w-6xl px-6 py-28">
+    <section id="approach" className="scroll-mt-16 mx-auto max-w-6xl px-6 py-20 md:py-24">
       <div className="grid items-center gap-14 lg:grid-cols-2">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
