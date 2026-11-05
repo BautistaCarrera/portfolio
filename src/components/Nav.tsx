@@ -19,10 +19,12 @@ export default function Nav() {
 
   // Resalta el link de la sección que está en pantalla.
   useEffect(() => {
-    const ids = [...links.map((l) => l.href.slice(1)), "contact"];
+    const ids = ["top", ...links.map((l) => l.href.slice(1)), "contact"];
     const observer = new IntersectionObserver(
       (entries) => {
-        for (const e of entries) if (e.isIntersecting) setActive(e.target.id);
+        for (const e of entries) {
+          if (e.isIntersecting) setActive(e.target.id === "top" ? "" : e.target.id);
+        }
       },
       { rootMargin: "-40% 0px -55% 0px" }
     );
