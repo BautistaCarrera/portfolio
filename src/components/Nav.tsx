@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -14,6 +14,16 @@ const links = [
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
+
+  // Esc cierra el menú móvil.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
     <motion.header
@@ -53,7 +63,9 @@ export default function Nav() {
         <button
           onClick={() => setOpen((o) => !o)}
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border)] text-[var(--foreground)] md:hidden"
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border)] text-[var(--foreground)] md:hidden"
         >
           {open ? <X size={16} /> : <Menu size={16} />}
         </button>
@@ -62,6 +74,7 @@ export default function Nav() {
       <AnimatePresence>
         {open && (
           <motion.div
+            id="mobile-menu"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -74,7 +87,7 @@ export default function Nav() {
                   <a
                     href={l.href}
                     onClick={() => setOpen(false)}
-                    className="block py-2 transition-colors hover:text-[var(--accent)]"
+                    className="block py-3 transition-colors hover:text-[var(--accent)]"
                   >
                     {l.label}
                   </a>

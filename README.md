@@ -10,14 +10,14 @@ Portfolio construido con Next.js 16 (App Router), Tailwind CSS y Framer Motion, 
 
 ### Highlights
 
-- **Asistente de IA en vivo**: un orquestador que deriva cada consulta a 5 agentes especializados (Ventas, Cobranzas, Soporte, Administración, Contabilidad), corriendo sobre Gemini con fallback automático a OpenRouter.
+- **Asistente de IA en vivo**: un orquestador que deriva cada consulta a 5 agentes especializados (Ventas, Cobranzas, Soporte, Administración, Contabilidad), corriendo sobre Gemini (con cadena de modelos) y fallback automático a modelos gratuitos de OpenRouter y, como último escalón, un modelo barato de pago.
 - **Case studies reales**: 3 proyectos de agentes autónomos en producción (procesamiento de facturas con visión + Odoo, equipo de soporte técnico vía WhatsApp/SSH, automatización de bandeja de entrada), documentados con arquitectura y decisiones técnicas.
 - **CV descargable e integrado** con links reales a portfolio, LinkedIn y contacto.
 
 ## Stack
 
 - **Frontend:** Next.js 16, TypeScript, Tailwind CSS, Framer Motion
-- **IA:** Google Gemini (`gemini-3.6-flash`) + cascada de fallback en OpenRouter
+- **IA:** Google Gemini (`gemini-3.1-flash-lite` → `gemini-3.6-flash`) → modelos `:free` de OpenRouter → `mistral-small-3.2` (pago, ~centavos)
 - **Analytics:** Vercel Analytics
 - **Deploy:** Vercel
 
@@ -29,3 +29,5 @@ npm run dev
 ```
 
 Abrí [http://localhost:3000](http://localhost:3000). Necesitás un `.env.local` con `GEMINI_API_KEY` y `OPENROUTER_API_KEY` para que el asistente de IA funcione en desarrollo.
+
+Variables opcionales: `ASSISTANT_DEBUG=1` agrega los headers `x-provider` y `x-gemini-fail` a la respuesta de `/api/assistant` para diagnosticar qué proveedor respondió. La API solo acepta pedidos con `Origin` del propio sitio. Conviene fijar un límite de gasto en la clave de OpenRouter.

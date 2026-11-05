@@ -134,6 +134,13 @@ export default function AIAssistant() {
     el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
   }, [messages, typing]);
 
+  // El error se oculta solo después de unos segundos.
+  useEffect(() => {
+    if (!errorMsg) return;
+    const t = setTimeout(() => setErrorMsg(null), 8000);
+    return () => clearTimeout(t);
+  }, [errorMsg]);
+
   async function send(text: string) {
     const trimmed = text.trim();
     if (!trimmed || typing) return;
@@ -204,7 +211,7 @@ export default function AIAssistant() {
           role: "assistant",
           agentId: activeAgent,
           content: data.content,
-          link: detectLink(data.content),
+          link: activeAgent === "orquestador" ? detectLink(data.content) : undefined,
           action: data.action ?? undefined,
         },
       ]);
