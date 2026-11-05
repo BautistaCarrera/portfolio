@@ -52,8 +52,8 @@ export default function Certifications() {
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6 }}
       >
-        <p className="font-mono-code text-xs uppercase tracking-widest text-[var(--accent)]">
-          /certifications
+        <p className="font-label text-xs uppercase tracking-wider text-[var(--accent)]">
+          Certificaciones
         </p>
         <h2 className="mt-2 text-3xl font-semibold sm:text-4xl">
           Certificaciones
@@ -92,7 +92,7 @@ export default function Certifications() {
                 <Award size={14} className="mt-0.5 shrink-0 text-[var(--accent)]" />
                 <span className="text-sm font-medium">{cert.title}</span>
               </div>
-              <span className="flex w-fit items-center gap-1 rounded-full bg-[var(--accent)]/10 px-2 py-0.5 font-mono-code text-[10px] text-[var(--accent)]">
+              <span className="flex w-fit items-center gap-1 rounded-full bg-[var(--accent)]/10 px-2 py-0.5 font-label text-[11px] text-[var(--accent)]">
                 <Check size={10} />
                 Completado
               </span>
@@ -111,7 +111,7 @@ export default function Certifications() {
             role="dialog"
             aria-modal="true"
             aria-label={`Certificado — ${selected.title}`}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-6 backdrop-blur-sm"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/70 p-6 backdrop-blur-sm"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}

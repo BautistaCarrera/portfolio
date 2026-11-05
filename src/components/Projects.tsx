@@ -129,8 +129,8 @@ export default function Projects() {
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6 }}
       >
-        <p className="font-mono-code text-xs uppercase tracking-widest text-[var(--accent)]">
-          /projects
+        <p className="font-label text-xs uppercase tracking-wider text-[var(--accent)]">
+          Proyectos
         </p>
         <h2 className="mt-2 text-3xl font-semibold sm:text-4xl">
           Proyectos de agentes
@@ -148,7 +148,7 @@ export default function Projects() {
             className="overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)]/60"
           >
             <div className="border-b border-[var(--border)] bg-[var(--background-alt)] px-6 py-5 sm:px-8">
-              <p className="font-mono-code text-xs uppercase tracking-widest text-[var(--accent)]">
+              <p className="font-label text-xs uppercase tracking-wider text-[var(--accent)]">
                 case study — en producción
               </p>
               <h3 className="mt-1 text-xl font-semibold sm:text-2xl">
@@ -162,7 +162,7 @@ export default function Projects() {
                 {cs.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-[var(--border)] px-3 py-1 font-mono-code text-[11px] text-[var(--muted)]"
+                    className="rounded-full border border-[var(--border)] px-3 py-1 font-label text-xs text-[var(--muted)]"
                   >
                     {tag}
                   </span>
@@ -184,7 +184,7 @@ export default function Projects() {
                     <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--accent)]/10 text-[var(--accent)]">
                       <step.icon size={15} />
                     </div>
-                    <span className="font-mono-code text-xs text-[var(--muted)]">
+                    <span className="font-label text-xs text-[var(--muted)]">
                       0{i + 1}
                     </span>
                   </div>

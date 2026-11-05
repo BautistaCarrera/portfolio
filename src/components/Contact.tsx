@@ -32,8 +32,8 @@ export default function Contact() {
         transition={{ duration: 0.6 }}
         className="rounded-3xl border border-[var(--border)] bg-[var(--card)]/60 px-8 py-16 text-center"
       >
-        <p className="font-mono-code text-xs uppercase tracking-widest text-[var(--accent)]">
-          /contact
+        <p className="font-label text-xs uppercase tracking-wider text-[var(--accent)]">
+          Contacto
         </p>
         <h2 className="mt-2 text-3xl font-semibold sm:text-4xl">
           Disponible para nuevos proyectos
@@ -51,7 +51,7 @@ export default function Contact() {
               rel="noreferrer"
               className={
                 l.highlight
-                  ? "flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[#05070d] transition-transform hover:scale-105"
+                  ? "flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-105"
                   : "flex items-center gap-2 rounded-full border border-[var(--border)] px-5 py-2.5 text-sm text-[var(--foreground)] transition-colors hover:border-[var(--accent)]/50 hover:text-[var(--accent)]"
               }
             >
@@ -62,7 +62,7 @@ export default function Contact() {
         </div>
       </motion.div>
 
-      <p className="mt-10 text-center font-mono-code text-xs text-[var(--muted)]">
+      <p className="mt-10 text-center font-label text-xs text-[var(--muted)]">
         © {new Date().getFullYear()} Bautista Carrera
       </p>
     </section>

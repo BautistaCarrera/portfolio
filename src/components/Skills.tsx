@@ -76,8 +76,8 @@ export default function Skills() {
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6 }}
       >
-        <p className="font-mono-code text-xs uppercase tracking-widest text-[var(--accent)]">
-          /skills
+        <p className="font-label text-xs uppercase tracking-wider text-[var(--accent)]">
+          Skills
         </p>
         <h2 className="mt-2 text-3xl font-semibold sm:text-4xl">
           Stack técnico
@@ -132,7 +132,7 @@ export default function Skills() {
             <div key={lang.name}>
               <div className="flex items-center justify-between text-sm">
                 <span className="font-medium">{lang.name}</span>
-                <span className="font-mono-code text-xs text-[var(--muted)]">
+                <span className="font-label text-xs text-[var(--muted)]">
                   {lang.level}
                 </span>
               </div>

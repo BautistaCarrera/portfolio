@@ -44,8 +44,8 @@ export default function Experience() {
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6 }}
       >
-        <p className="font-mono-code text-xs uppercase tracking-widest text-[var(--accent)]">
-          /experience
+        <p className="font-label text-xs uppercase tracking-wider text-[var(--accent)]">
+          Experiencia
         </p>
         <h2 className="mt-2 text-3xl font-semibold sm:text-4xl">Trayectoria</h2>
       </motion.div>
@@ -61,7 +61,7 @@ export default function Experience() {
             className="relative"
           >
             <span className="absolute -left-[2.35rem] top-1.5 h-2.5 w-2.5 rounded-full bg-[var(--accent)]" />
-            <p className="font-mono-code text-xs text-[var(--muted)]">
+            <p className="font-label text-xs text-[var(--muted)]">
               {it.period}
             </p>
             <h3 className="mt-1 text-lg font-semibold">

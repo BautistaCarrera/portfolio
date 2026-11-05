@@ -236,10 +236,10 @@ export default function AIAssistant() {
   const suggestions = SUGGESTIONS_BY_AGENT[activeAgent];
 
   return (
-    <div className="mx-auto max-w-2xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)]/70 shadow-2xl shadow-black/40 backdrop-blur">
+    <div className="mx-auto max-w-2xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)]/70 shadow-xl shadow-slate-900/10 backdrop-blur">
       <div className="flex items-center gap-2 border-b border-[var(--border)] bg-[var(--background-alt)] px-4 py-3">
         <Sparkles size={14} className="text-[var(--accent)]" />
-        <span className="font-mono-code text-xs text-[var(--muted)]">
+        <span className="font-label text-xs text-[var(--muted)]">
           {activeAgent === "orquestador" ? "Orquestador" : `Orquestador → ${activeDef.name}`}
         </span>
         <span className="ml-auto h-1.5 w-1.5 rounded-full bg-[var(--accent)] pulse-node" />
@@ -264,7 +264,7 @@ export default function AIAssistant() {
                   className="flex items-center justify-center gap-2 py-1"
                 >
                   <span className="h-px w-6 bg-[var(--border)]" />
-                  <span className="font-mono-code text-[10px] uppercase tracking-widest text-[var(--accent)]">
+                  <span className="font-label text-[11px] uppercase tracking-wider text-[var(--accent)]">
                     {m.content}
                   </span>
                   <span className="h-px w-6 bg-[var(--border)]" />
@@ -299,12 +299,12 @@ export default function AIAssistant() {
                   }`}
                 >
                   {m.role === "assistant" && agentDef && (
-                    <span className="font-mono-code text-[10px] text-[var(--muted)]">
+                    <span className="font-label text-[11px] text-[var(--muted)]">
                       {agentDef.name}
                     </span>
                   )}
                   {m.action && (
-                    <span className="flex items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--background)] px-2.5 py-1 font-mono-code text-[10px] text-[var(--accent)]">
+                    <span className="flex items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--background)] px-2.5 py-1 font-label text-[11px] text-[var(--accent)]">
                       <Loader2 size={10} className="animate-spin" />
                       {m.action}
                     </span>
@@ -321,7 +321,7 @@ export default function AIAssistant() {
                   {m.link && (
                     <button
                       onClick={() => goTo(m.link!.href)}
-                      className="flex items-center gap-1 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/5 px-3 py-1.5 font-mono-code text-[11px] text-[var(--accent)] transition-colors hover:bg-[var(--accent)]/15"
+                      className="flex items-center gap-1 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/5 px-3 py-1.5 font-label text-xs text-[var(--accent)] transition-colors hover:bg-[var(--accent)]/15"
                     >
                       {m.link.label}
                       <ArrowRight size={11} />
@@ -351,7 +351,7 @@ export default function AIAssistant() {
         )}
 
         {errorMsg && (
-          <div className="rounded-xl border border-red-500/30 bg-red-500/5 px-4 py-2.5 text-xs text-red-300">
+          <div className="rounded-xl border border-red-300 bg-red-50 px-4 py-2.5 text-xs text-red-700">
             {errorMsg}
           </div>
         )}
@@ -364,7 +364,7 @@ export default function AIAssistant() {
             <button
               key={s}
               onClick={() => send(s)}
-              className="inline-flex min-h-9 items-center rounded-full border border-[var(--border)] px-3 font-mono-code text-[11px] text-[var(--muted)] transition-colors hover:border-[var(--accent)]/50 hover:text-[var(--accent)]"
+              className="inline-flex min-h-9 items-center rounded-full border border-[var(--border)] px-3 font-label text-xs text-[var(--muted)] transition-colors hover:border-[var(--accent)]/50 hover:text-[var(--accent)]"
             >
               {s}
             </button>
@@ -396,7 +396,7 @@ export default function AIAssistant() {
             type="submit"
             aria-label="Enviar"
             disabled={typing}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-[#05070d] transition-transform hover:scale-105 disabled:opacity-50"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-white transition-transform hover:scale-105 disabled:opacity-50"
           >
             <Send size={15} />
           </button>

@@ -51,9 +51,8 @@ export default function Nav() {
       className="fixed top-0 z-50 w-full border-b border-[var(--border)]/60 bg-[var(--background)]/70 backdrop-blur-md"
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#top" className="inline-flex min-h-11 items-center font-mono-code text-sm text-[var(--foreground)]">
-          <span className="text-[var(--accent)]">&gt;</span> bautista.carrera
-          <span className="cursor-blink text-[var(--accent)]">_</span>
+        <a href="#top" className="inline-flex min-h-11 items-center text-base font-semibold tracking-tight text-[var(--foreground)]">
+          <span>Bautista</span><span className="ml-1.5 text-[var(--accent)]">Carrera</span>
         </a>
 
         <ul className="hidden gap-5 text-sm lg:gap-8 text-[var(--muted)] lg:flex">

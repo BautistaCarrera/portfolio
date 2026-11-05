@@ -64,7 +64,7 @@ export default function AgentNetwork() {
           const d = Math.hypot(a.x - b.x, a.y - b.y);
           if (d < LINK_DIST) {
             const alpha = (1 - d / LINK_DIST) * 0.35;
-            ctx.strokeStyle = `rgba(94, 234, 212, ${alpha})`;
+            ctx.strokeStyle = `rgba(29, 78, 216, ${alpha})`;
             ctx.lineWidth = 0.6;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
@@ -79,8 +79,8 @@ export default function AgentNetwork() {
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r + glow * 0.8, 0, Math.PI * 2);
         ctx.fillStyle = i % 5 === 0
-          ? `rgba(129, 140, 248, ${0.5 + glow * 0.5})`
-          : `rgba(94, 234, 212, ${0.4 + glow * 0.4})`;
+          ? `rgba(67, 56, 202, ${0.35 + glow * 0.3})`
+          : `rgba(29, 78, 216, ${0.25 + glow * 0.3})`;
         ctx.fill();
       });
 
@@ -103,7 +103,7 @@ export default function AgentNetwork() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 h-full w-full opacity-70"
+      className="absolute inset-0 h-full w-full opacity-40"
       aria-hidden="true"
     />
   );

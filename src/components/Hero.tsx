@@ -1,14 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, Download, Terminal } from "lucide-react";
+import { ArrowDown, Download } from "lucide-react";
 import AgentNetwork from "./AgentNetwork";
 
 export default function Hero() {
   return (
     <section
       id="top"
-      className="grid-bg relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-20"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-20"
     >
       <AgentNetwork />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-[var(--background)]/40 to-[var(--background)]" />
@@ -19,9 +19,8 @@ export default function Hero() {
         transition={{ duration: 0.7, delay: 0.15 }}
         className="relative z-10 mx-auto flex max-w-3xl flex-col items-center text-center"
       >
-        <div className="mb-6 flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)]/80 px-4 py-1.5 font-mono-code text-xs text-[var(--muted)]">
+        <div className="mb-6 flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)]/80 px-4 py-1.5 font-label text-xs text-[var(--muted)]">
           <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)] pulse-node" />
-          <Terminal size={12} className="text-[var(--accent)]" />
           Disponible para nuevos proyectos
         </div>
 
@@ -29,7 +28,7 @@ export default function Hero() {
           Bautista <span className="text-gradient">Carrera</span>
         </h1>
 
-        <p className="mt-3 font-mono-code text-sm text-[var(--accent)] sm:text-base">
+        <p className="mt-3 font-label text-sm text-[var(--accent)] sm:text-base">
           AI Developer
         </p>
 
@@ -42,7 +41,7 @@ export default function Hero() {
         <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
           <a
             href="#projects"
-            className="rounded-full bg-[var(--accent)] px-6 py-2.5 text-sm font-semibold text-[#05070d] transition-transform hover:scale-105"
+            className="rounded-full bg-[var(--accent)] px-6 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-105"
           >
             Ver proyectos
           </a>
@@ -70,7 +69,7 @@ export default function Hero() {
         transition={{ delay: 1, duration: 0.8 }}
         className="absolute bottom-8 z-10 flex flex-col items-center gap-2 text-[var(--muted)] transition-colors hover:text-[var(--accent)]"
       >
-        <span className="font-mono-code text-[10px] uppercase tracking-widest">
+        <span className="font-label text-[11px] uppercase tracking-wider">
           scroll
         </span>
         <ArrowDown size={16} className="animate-bounce" />

@@ -28,8 +28,8 @@ export default function Approach() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
         >
-          <p className="font-mono-code text-xs uppercase tracking-widest text-[var(--accent)]">
-            /approach
+          <p className="font-label text-xs uppercase tracking-wider text-[var(--accent)]">
+            Enfoque
           </p>
           <h2 className="mt-2 text-3xl font-semibold sm:text-4xl">
             Mi enfoque
@@ -62,7 +62,7 @@ export default function Approach() {
         >
           {/* Entrada de tarea */}
           <div className="flex justify-center">
-            <div className="rounded-full border border-[var(--border)] bg-[var(--background-alt)] px-4 py-1.5 font-mono-code text-[11px] text-[var(--muted)]">
+            <div className="rounded-full border border-[var(--border)] bg-[var(--background-alt)] px-4 py-1.5 font-label text-xs text-[var(--muted)]">
               tarea entrante
             </div>
           </div>
@@ -76,7 +76,7 @@ export default function Approach() {
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[var(--accent)]/50 bg-[var(--accent)]/10 text-[var(--accent)] shadow-lg shadow-[var(--accent)]/10">
                 <Bot size={22} className="pulse-node" />
               </div>
-              <span className="font-mono-code text-[11px] text-[var(--foreground)]">
+              <span className="font-label text-xs text-[var(--foreground)]">
                 Orquestador
               </span>
             </div>
@@ -118,7 +118,7 @@ export default function Approach() {
                   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--accent-2)]/10 text-[var(--accent-2)]">
                     <a.icon size={16} />
                   </div>
-                  <span className="font-mono-code text-[10px] leading-tight text-[var(--muted)]">
+                  <span className="font-label text-[11px] leading-tight text-[var(--muted)]">
                     {a.label}
                   </span>
                 </motion.div>

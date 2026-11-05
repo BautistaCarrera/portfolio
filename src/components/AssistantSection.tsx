@@ -14,8 +14,8 @@ export default function AssistantSection() {
         transition={{ duration: 0.6 }}
         className="mb-12 text-center"
       >
-        <p className="font-mono-code text-xs uppercase tracking-widest text-[var(--accent)]">
-          /assistant
+        <p className="font-label text-xs uppercase tracking-wider text-[var(--accent)]">
+          Asistente
         </p>
         <h2 className="mt-2 text-3xl font-semibold sm:text-4xl">
           Arquitectura de agentes, en vivo
@@ -24,7 +24,7 @@ export default function AssistantSection() {
           Un orquestador que deriva cada consulta al agente especializado
           correcto — con IA real, no respuestas guionadas. Probalo vos mismo.
         </p>
-        <p className="mx-auto mt-3 flex max-w-lg items-center justify-center gap-1.5 font-mono-code text-[11px] text-[var(--muted)]">
+        <p className="mx-auto mt-3 flex max-w-lg items-center justify-center gap-1.5 font-label text-xs text-[var(--muted)]">
           <Clock size={11} />
           Corre sobre modelos gratuitos — puede tardar unos segundos en
           responder.
