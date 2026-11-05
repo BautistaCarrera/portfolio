@@ -17,6 +17,7 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
 
+
   // Resalta el link de la sección que está en pantalla.
   useEffect(() => {
     const ids = ["top", ...links.map((l) => l.href.slice(1)), "contact"];
@@ -63,7 +64,7 @@ export default function Nav() {
               <a
                 href={l.href}
                 aria-current={active === l.href.slice(1) ? "true" : undefined}
-                className={`transition-colors hover:text-[var(--accent)] ${
+                className={`block py-2 transition-colors hover:text-[var(--accent)] ${
                   active === l.href.slice(1) ? "text-[var(--accent)]" : ""
                 }`}
               >
@@ -97,11 +98,13 @@ export default function Nav() {
         {open && (
           <motion.div
             id="mobile-menu"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="overflow-hidden border-t border-[var(--border)]/60 bg-[var(--background)]/95 backdrop-blur-md lg:hidden"
+            // Sin animar el alto (height: auto): framer-motion restauraba el
+            // scroll previo al medirlo y cancelaba el salto al ancla en celular.
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="border-t border-[var(--border)]/60 bg-[var(--background)]/95 backdrop-blur-md lg:hidden"
           >
             <ul className="flex flex-col gap-1 px-6 py-4 text-sm text-[var(--muted)]">
               {links.map((l) => (
