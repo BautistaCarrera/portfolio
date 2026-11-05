@@ -357,7 +357,7 @@ export default function AIAssistant() {
             <button
               key={s}
               onClick={() => send(s)}
-              className="rounded-full border border-[var(--border)] px-3 py-1 font-mono-code text-[11px] text-[var(--muted)] transition-colors hover:border-[var(--accent)]/50 hover:text-[var(--accent)]"
+              className="inline-flex min-h-9 items-center rounded-full border border-[var(--border)] px-3 font-mono-code text-[11px] text-[var(--muted)] transition-colors hover:border-[var(--accent)]/50 hover:text-[var(--accent)]"
             >
               {s}
             </button>

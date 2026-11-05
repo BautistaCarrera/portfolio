@@ -23,7 +23,7 @@ export default function Nav() {
       className="fixed top-0 z-50 w-full border-b border-[var(--border)]/60 bg-[var(--background)]/70 backdrop-blur-md"
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#top" className="font-mono-code text-sm text-[var(--foreground)]">
+        <a href="#top" className="inline-flex min-h-11 items-center font-mono-code text-sm text-[var(--foreground)]">
           <span className="text-[var(--accent)]">&gt;</span> bautista.carrera
           <span className="cursor-blink text-[var(--accent)]">_</span>
         </a>
@@ -44,7 +44,7 @@ export default function Nav() {
         <div className="hidden items-center gap-3 md:flex">
           <a
             href="#contact"
-            className="rounded-full border border-[var(--accent)]/40 px-4 py-1.5 text-xs font-medium text-[var(--accent)] transition-colors hover:bg-[var(--accent)]/10"
+            className="rounded-full border border-[var(--accent)]/40 inline-flex min-h-9 items-center px-4 text-xs font-medium text-[var(--accent)] transition-colors hover:bg-[var(--accent)]/10"
           >
             Contactar
           </a>
