@@ -69,6 +69,8 @@ export default function RootLayout({
               name: "Bautista Carrera",
               jobTitle: "AI Developer",
               url: SITE_URL,
+              email: "mailto:carrerabauti@gmail.com",
+              knowsLanguage: ["es", "en"],
               sameAs: [
                 "https://www.linkedin.com/in/bautista-carrera-/",
               ],

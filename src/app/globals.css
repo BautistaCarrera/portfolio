@@ -38,13 +38,6 @@ body {
   letter-spacing: 0.01em;
 }
 
-.grid-bg {
-  background-image:
-    linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-
 .text-gradient {
   background: linear-gradient(90deg, #1e3a8a, #2563eb);
   -webkit-background-clip: text;

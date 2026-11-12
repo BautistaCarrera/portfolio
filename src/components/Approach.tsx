@@ -87,7 +87,7 @@ export default function Approach() {
             <svg
               viewBox="0 0 600 60"
               preserveAspectRatio="none"
-              className="absolute -top-8 left-0 h-8 w-full"
+              className="absolute -top-8 left-0 hidden h-8 w-full lg:block"
               aria-hidden="true"
             >
               {agents.map((_, i) => {

@@ -63,7 +63,8 @@ export default function Hero() {
       </motion.div>
 
       <motion.a
-        href="#skills"
+        href="#approach"
+        aria-label="Bajar a la siguiente sección"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.8 }}
