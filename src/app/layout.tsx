@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   metadataBase: new URL(SITE_URL),
+  alternates: { canonical: "/" },
   keywords: [
     "AI Developer",
     "Agent Engineer",
