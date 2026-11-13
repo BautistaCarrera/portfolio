@@ -64,7 +64,7 @@ export default function Hero() {
 
       <motion.a
         href="#approach"
-        aria-label="Bajar a la siguiente sección"
+        aria-label="Scroll: bajar a la siguiente sección"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.8 }}
