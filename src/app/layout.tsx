@@ -12,7 +12,7 @@ const geistSans = Geist({
 const SITE_URL = "https://bautistacarrera.vercel.app";
 const TITLE = "Bautista Carrera — AI Developer";
 const DESCRIPTION =
-  "Desarrollador de IA enfocado en sistemas de agentes autónomos — diseño, construyo y despliego soluciones que integran modelos de lenguaje con herramientas reales.";
+  "Desarrollador de IA: agentes autónomos que funcionan en producción, integrados a tus sistemas (ERP, CRM, mensajería), con control humano y trazabilidad.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: TITLE,
     description:
-      "Sistemas de agentes autónomos, orquestación de LLMs y automatización aplicada.",
+      "Agentes autónomos en producción: integración con ERP, CRM y mensajería, con control humano y trazabilidad.",
     type: "website",
     url: SITE_URL,
     siteName: "Bautista Carrera — Portfolio",
