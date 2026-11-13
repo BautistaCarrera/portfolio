@@ -28,6 +28,7 @@ interface CaseStudy {
   tags: string[];
   flow: FlowStep[];
   why: string;
+  impact: string;
 }
 
 const CASE_STUDIES: CaseStudy[] = [
@@ -59,6 +60,8 @@ const CASE_STUDIES: CaseStudy[] = [
       },
     ],
     why: "no solo lee un documento — decide qué hacer con el dato dentro de un sistema de negocio real, con control humano en cada paso crítico (excessive agency bajo control) y sin tocar nada hasta recibir confirmación.",
+    impact:
+      "cada comprobante llega al ERP ya validado y clasificado, sin doble carga manual.",
   },
   {
     title: "Equipo de Agentes de Soporte",
@@ -88,6 +91,8 @@ const CASE_STUDIES: CaseStudy[] = [
       },
     ],
     why: "descarga al equipo humano de lo repetitivo y acelera la resolución real — el diagnóstico técnico ya está hecho cuando una persona lo mira, en vez de arrancar de cero.",
+    impact:
+      "quien atiende el ticket arranca con la causa probable y lo ya descartado, no desde cero.",
   },
   {
     title: "Agente de Email Automatizado",
@@ -117,6 +122,8 @@ const CASE_STUDIES: CaseStudy[] = [
       },
     ],
     why: "libera horas de gestión de bandeja de entrada sin sacarle el control a la persona — el agente prepara todo, pero la decisión final de qué se envía siempre es humana.",
+    impact:
+      "el directivo revisa borradores listos en vez de redactar cada respuesta desde cero.",
   },
 ];
 
@@ -200,6 +207,10 @@ export default function Projects() {
               <p className="text-xs leading-relaxed text-[var(--muted)]">
                 <span className="text-[var(--accent)]">Por qué importa:</span>{" "}
                 {cs.why}
+              </p>
+              <p className="mt-2 text-xs leading-relaxed text-[var(--muted)]">
+                <span className="text-[var(--accent)]">Impacto:</span>{" "}
+                {cs.impact}
               </p>
             </div>
           </motion.div>

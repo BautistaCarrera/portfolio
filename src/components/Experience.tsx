@@ -7,7 +7,7 @@ const items = [
     period: "2025 — Presente",
     role: "AI Developer",
     org: "Hitofusion",
-    desc: "Diseño y desarrollo de agentes de IA autónomos para automatizar tareas y flujos de trabajo. Integración de modelos y lógica de agentes inteligentes en productos de software, siguiendo buenas prácticas de desarrollo.",
+    desc: "Diseño y desarrollo de agentes de IA autónomos para automatizar tareas y flujos de trabajo. Integración de modelos y lógica de agentes inteligentes en productos de software, siguiendo buenas prácticas de desarrollo. Trabajo en equipo con desarrolladores y soporte, bajo metodología ágil.",
   },
   {
     period: "En curso",

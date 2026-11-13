@@ -55,7 +55,8 @@ const groups = [
     title: "Backend & Frontend",
     items: [
       "Python · Node.js · TypeScript",
-      "APIs REST",
+      "C# .NET · Java (formación)",
+      "APIs REST · SQL",
       "PostgreSQL · Supabase",
       "React · Next.js",
     ],
