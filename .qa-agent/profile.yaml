@@ -1,0 +1,79 @@
+company: local
+project: portfolio
+path: .
+kind: web
+stacks:
+- node
+commands:
+  install:
+  - npm
+  - ci
+  build:
+  - npm
+  - run
+  - build
+  lint:
+  - npm
+  - run
+  - lint
+  audit:
+  - npm
+  - audit
+  - --omit=dev
+  test: null
+timeouts:
+  install: 600
+  build: 600
+  test: 900
+  lint: 300
+  audit: 180
+web:
+  url: null
+  start:
+  - npm
+  - run
+  - start
+  - --
+  - -p
+  - '{port}'
+  pages:
+  - /
+  flows:
+  - name: el menú lleva a Proyectos
+    steps:
+    - goto: /
+    - click: nav ul >> text=Proyectos
+    - expect_url: '#projects'
+  - name: el menú lleva a Producción
+    steps:
+    - goto: /
+    - click: nav ul >> text=Producción
+    - expect_url: '#production'
+    - expect_visible: '#production h2'
+  - name: el modal de certificados abre y cierra
+    steps:
+    - goto: /
+    - click: '#certifications button >> nth=0'
+    - expect_visible: '[role=dialog]'
+    - press: Escape
+    - expect_hidden: '[role=dialog]'
+  - name: menú móvil
+    viewport: mobile
+    steps:
+    - goto: /
+    - click: button[aria-label='Abrir menú']
+    - expect_visible: '#mobile-menu'
+    - click: '#mobile-menu >> text=Skills'
+    - expect_url: '#skills'
+  ignore:
+    urls:
+    - /_vercel/
+    console: []
+signals:
+- package.json
+- 'gestor de paquetes: npm'
+- 'framework web: next, react'
+notes:
+- 'Se detectó Vercel Analytics: el perfil ignora /_vercel/ (no existe fuera de Vercel).'
+- El proyecto Node no define tests automatizados.
+approved: true

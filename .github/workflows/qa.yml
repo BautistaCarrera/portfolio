@@ -1,0 +1,21 @@
+# QA automático en cada Pull Request, con el agente https://github.com/BautistaCarrera/qa-agent
+# El perfil que define qué comandos se ejecutan vive en .qa-agent/profile.yaml
+name: QA
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  qa:
+    # Para producción conviene fijar una versión estable (@v1 o un commit) en vez de @main.
+    uses: BautistaCarrera/qa-agent/.github/workflows/qa.yml@main
+    with:
+      fail-on: block      # block | inconclusive | never
+      analyst: false      # true agrega el análisis con IA (requiere el secreto ANTHROPIC_API_KEY)
+    # secrets:
+    #   ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
