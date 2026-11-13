@@ -33,9 +33,9 @@ export default function Hero() {
         </p>
 
         <p className="mt-6 max-w-xl text-balance text-base leading-relaxed text-[var(--muted)] sm:text-lg">
-          Desarrollador de IA enfocado en sistemas de agentes autónomos — diseño,
-          construyo y despliego soluciones que integran modelos de lenguaje con
-          herramientas reales.
+          Desarrollador de IA enfocado en agentes autónomos que funcionan en
+          producción: integrados a tus sistemas (ERP, CRM, mensajería), con
+          control humano y trazabilidad.
         </p>
 
         <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
