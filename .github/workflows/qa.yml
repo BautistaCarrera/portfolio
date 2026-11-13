@@ -12,9 +12,10 @@ permissions:
 
 jobs:
   qa:
-    # Para producción conviene fijar una versión estable (@v1 o un commit) en vez de @main.
-    uses: BautistaCarrera/qa-agent/.github/workflows/qa.yml@main
+    # Versión fijada: el workflow (@v0.1.0) y el código del agente (qa-agent-ref) deben coincidir.
+    uses: BautistaCarrera/qa-agent/.github/workflows/qa.yml@v0.1.0
     with:
+      qa-agent-ref: v0.1.0
       fail-on: block      # block | inconclusive | never
       analyst: false      # true agrega el análisis con IA (requiere el secreto ANTHROPIC_API_KEY)
     # secrets:
