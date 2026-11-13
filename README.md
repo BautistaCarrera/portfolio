@@ -31,3 +31,5 @@ npm run dev
 Abrí [http://localhost:3000](http://localhost:3000). Necesitás un `.env.local` con `GEMINI_API_KEY` y `OPENROUTER_API_KEY` para que el asistente de IA funcione en desarrollo.
 
 Variables opcionales: `ASSISTANT_DEBUG=1` agrega los headers `x-provider` y `x-gemini-fail` a la respuesta de `/api/assistant` para diagnosticar qué proveedor respondió. La API solo acepta pedidos con `Origin` del propio sitio. Conviene fijar un límite de gasto en la clave de OpenRouter.
+
+<!-- prueba de QA automatico -->
