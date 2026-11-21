@@ -80,7 +80,14 @@
   .section-title{font-size:30px;font-weight:600;letter-spacing:-0.6px;color:var(--text-primary);max-width:600px;}
   .section-desc{margin-top:14px;font-size:15.5px;color:var(--text-tertiary);max-width:600px;}
 
-  .featured-card{margin-top:44px;border:1px solid var(--border-standard);border-radius:10px;background:var(--bg-panel);padding:36px;}
+  .sub-label{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:500;color:var(--accent);margin-bottom:10px;}
+  .sub-label::before{content:"// ";color:var(--text-quaternary);}
+  .sub-title{font-size:24px;font-weight:600;letter-spacing:-0.4px;color:var(--text-primary);}
+  .sub-desc{margin-top:12px;font-size:15px;color:var(--text-tertiary);max-width:600px;}
+  .proyectos-block{margin-top:60px;}
+  .proyectos-block:first-of-type{margin-top:44px;}
+
+  .featured-card{margin-top:28px;border:1px solid var(--border-standard);border-radius:10px;background:var(--bg-panel);padding:36px;}
   .featured-head{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;}
   .featured-head h3{font-size:22px;font-weight:600;color:var(--text-primary);letter-spacing:-0.3px;}
   .live-badge{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--green);background:rgba(95,217,138,0.07);border:1px solid rgba(95,217,138,0.22);padding:5px 10px;border-radius:4px;white-space:nowrap;}
@@ -154,8 +161,7 @@
   <nav>
     <a href="#top" class="logo"><span class="cursor">&gt;_</span>&nbsp;bautista carrera</a>
     <div class="nav-links">
-      <a href="#documind">DocuMind</a>
-      <a href="#casos">Casos de estudio</a>
+      <a href="#proyectos">Proyectos</a>
       <a href="#stack">Stack</a>
       <a href="#sobre-mi">Sobre mí</a>
     </div>
@@ -172,16 +178,21 @@
       <p class="lead">Agent Developer especializado en sistemas multiagente y orquestación de LLMs. 1.5 años construyendo agentes que atienden, venden y cobran para empresas reales — más un proyecto propio con el código, los diagramas y cada bug a la vista.</p>
       <div class="hero-ctas">
         <a href="#documind" class="btn btn-primary">Ver DocuMind en acción →</a>
-        <a href="#casos" class="btn btn-ghost">Casos de estudio</a>
+        <a href="#proyectos" class="btn btn-ghost">Casos de estudio</a>
       </div>
     </div>
   </section>
 
-  <section class="section" id="documind">
+  <section class="section" id="proyectos">
     <div class="wrap">
-      <div class="section-tag">proyecto propio · código público</div>
-      <h2 class="section-title reveal">DocuMind</h2>
-      <p class="section-desc reveal">Un bot de Telegram que lee tus documentos y responde preguntas citando la fuente exacta — sin inventar, sin mezclar archivos, sin servidor con URL pública.</p>
+      <div class="section-tag">lo que construí</div>
+      <h2 class="section-title reveal">Proyectos</h2>
+      <p class="section-desc reveal">Un proyecto propio de punta a punta, y 4 casos reales de 1.5 años en producción en Hitofusion — anonimizados por confidencialidad del cliente, pero con arquitectura y rol reales.</p>
+
+      <div class="proyectos-block" id="documind">
+        <div class="sub-label">proyecto propio · código público</div>
+        <h3 class="sub-title">DocuMind</h3>
+        <p class="sub-desc">Un bot de Telegram que lee tus documentos y responde preguntas citando la fuente exacta — sin inventar, sin mezclar archivos, sin servidor con URL pública.</p>
 
       <div class="featured-card reveal">
         <div class="featured-head">
@@ -229,20 +240,18 @@
           <a href="https://github.com/BautistaCarrera/docu-mind" target="_blank" class="btn btn-ghost">Ver código en GitHub</a>
         </div>
       </div>
-    </div>
-  </section>
+      </div>
 
-  <section class="section" id="casos">
-    <div class="wrap">
-      <div class="section-tag">1.5 años en producción</div>
-      <h2 class="section-title reveal">Casos de estudio</h2>
-      <p class="section-desc reveal">Proyectos construidos en Hitofusion (Odoo Gold Partner, Argentina). Anonimizados por confidencialidad del cliente — el problema, la arquitectura y mi rol son reales.</p>
+      <div class="proyectos-block" id="casos">
+        <div class="sub-label">1.5 años en producción</div>
+        <h3 class="sub-title">Casos de estudio</h3>
+        <p class="sub-desc">Proyectos construidos en Hitofusion (Odoo Gold Partner, Argentina). Anonimizados por confidencialidad del cliente — el problema, la arquitectura y mi rol son reales.</p>
 
       <div class="case-grid">
         <div class="case-card reveal">
           <div class="case-sector">rastreo_satelital</div>
           <h3>Equipo de agentes para atención, ventas y posventa</h3>
-          <p class="case-problem">Atención, ventas y posventa manejadas por personas vía WhatsApp, más consultas de marketplace 24/7. Había que automatizar la operación comercial completa.</p>
+          <p class="case-problem">Reemplacé tres roles de atención manual por WhatsApp —atención, ventas y posventa— por un equipo de agentes que además cubre marketplace las 24 horas, algo que ningún humano hacía de noche.</p>
           <div class="arch"><span class="root">orquestador</span>
 <span class="branch">├─</span> <span class="agent">agente-atencion</span>  <span class="chan">→ WhatsApp, Telegram</span>
 <span class="branch">├─</span> <span class="agent">agente-ventas</span>    <span class="chan">→ WhatsApp</span>
@@ -254,7 +263,7 @@
         <div class="case-card reveal">
           <div class="case-sector">inmobiliaria</div>
           <h3>Calificación de leads, agenda y CRM automático</h3>
-          <p class="case-problem">Calificar interesados por WhatsApp, agendar visitas contra la agenda real del equipo, y mantener el CRM actualizado desde Excel/PDF sin carga manual.</p>
+          <p class="case-problem">Automaticé de punta a punta la calificación de leads de una inmobiliaria: WhatsApp para calificar, agenda real para coordinar visitas, y carga de CRM directa desde Excel/PDF — sin que nadie tipee un dato a mano.</p>
           <div class="arch"><span class="root">orquestador</span>
 <span class="branch">├─</span> <span class="agent">agente-calificador</span> <span class="chan">→ WhatsApp</span>
 <span class="branch">├─</span> <span class="agent">agente-agenda</span>      <span class="chan">→ Calendario</span>
@@ -266,7 +275,7 @@
         <div class="case-card reveal">
           <div class="case-sector">productividad_ejecutiva</div>
           <h3>Agente de correo — construido en solitario</h3>
-          <p class="case-problem">Un directivo recibía un volumen de correo que no podía atender. El agente clasifica, resume y deja borradores listos para aprobar — nunca envía solo.</p>
+          <p class="case-problem">Construí, solo, el agente que vacía la bandeja de un directivo todos los días: clasifica, resume y deja el borrador listo — la decisión de enviar siempre queda en sus manos.</p>
           <div class="arch"><span class="root">Gmail (Composio)</span>
 <span class="branch">└─</span> <span class="agent">agente-correo</span>
    <span class="branch">├─</span> <span class="chan">clasifica + prioriza</span>
@@ -279,7 +288,7 @@
         <div class="case-card reveal">
           <div class="case-sector">cobranzas</div>
           <h3>Agente de cobranza con validación de pagos</h3>
-          <p class="case-problem">Gestionar cobranza de deuda por WhatsApp sin planillas manuales: informar estado de cuenta, recibir comprobantes y registrar todo contra el ERP real.</p>
+          <p class="case-problem">Reemplacé la cobranza manual de una empresa: el agente reclama deuda por WhatsApp, valida el comprobante de pago con OCR contra el ERP, y deja todo registrado sin planillas ni intervención manual.</p>
           <div class="arch"><span class="root">WhatsApp</span>
 <span class="branch">└─</span> <span class="agent">agente-cobranza</span>
    <span class="branch">├─</span> <span class="chan">informa estado de cuenta ← ERP</span>
@@ -287,6 +296,7 @@
           <div class="case-role"><b>Mi rol:</b> desarrollo del agente junto a otro dev. El desafío fue verificar que el comprobante (leído por OCR) matcheara realmente contra la deuda antes de registrar el pago.</div>
           <div class="case-stack"><span>Sistemas agénticos</span><span>WhatsApp</span><span>OCR</span><span>ERP (Odoo)</span></div>
         </div>
+      </div>
       </div>
     </div>
   </section>
