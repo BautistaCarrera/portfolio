@@ -179,7 +179,13 @@
   footer .foot-links a{font-size:12.5px;color:var(--text-quaternary);transition:color .15s;}
   footer .foot-links a:hover{color:var(--text-secondary);}
 
-  .enfoque-arch{margin-top:40px;max-width:640px;font-size:13px;line-height:2.1;padding:26px 28px;}
+  .enfoque-diagram-wrap{margin-top:40px;border:1px solid var(--border-standard);border-radius:20px;background:var(--bg-panel);padding:28px 28px 8px;}
+  .enfoque-svg{width:100%;height:auto;display:block;}
+  .enfoque-legend{display:grid;grid-template-columns:1fr 1fr;gap:4px 32px;margin-top:20px;border-top:1px solid var(--border-subtle);padding-top:4px;}
+  @media (max-width:680px){ .enfoque-legend{grid-template-columns:1fr;} }
+  .legend-item{display:flex;flex-direction:column;gap:2px;padding:12px 0;border-bottom:1px solid var(--border-subtle);}
+  .legend-name{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--cyan);font-weight:600;}
+  .legend-desc{font-size:13px;color:var(--text-tertiary);}
 
   .about-grid{display:grid;grid-template-columns:1fr 300px;gap:48px;margin-top:0;align-items:start;}
   @media (max-width:860px){ .about-grid{grid-template-columns:1fr;} }
@@ -234,18 +240,86 @@
       <div class="section-tag">— mi enfoque</div>
       <h2 class="section-title reveal">Un orquestador, varios agentes</h2>
       <p class="section-desc reveal">No armo un solo bot gigante que intenta hacer de todo. Diseño un orquestador central que delega en agentes especializados — cada uno con su propio prompt, su propio canal y su propia tarea — así un fallo en uno no tira abajo el resto.</p>
-      <div class="arch enfoque-arch reveal">
-<span class="chan">mensaje entrante</span> <span class="branch">(WhatsApp · Telegram · Email)</span>
-   │
-   ▼
-<span class="root">orquestador</span>  <span class="branch">— decide qué agente responde, según intención y canal</span>
-   │
-   <span class="branch">├─</span> <span class="agent">agente-atencion</span>     <span class="chan">consultas, FAQ, estado de cuenta</span>
-   <span class="branch">├─</span> <span class="agent">agente-ventas</span>       <span class="chan">calificación de leads, cotización</span>
-   <span class="branch">├─</span> <span class="agent">agente-cobranzas</span>    <span class="chan">reclamo de deuda + valida pago (OCR)</span>
-   <span class="branch">├─</span> <span class="agent">agente-backoffice</span>   <span class="chan">carga a CRM / ERP</span>
-   <span class="branch">├─</span> <span class="agent">agente-documentos</span>   <span class="chan">RAG sobre manuales y PDFs</span>
-   <span class="branch">└─</span> <span class="agent">agente-correo</span>       <span class="chan">clasifica y redacta borradores</span>
+      <div class="enfoque-diagram-wrap reveal">
+        <svg class="enfoque-svg" viewBox="0 0 860 310" preserveAspectRatio="xMidYMin meet" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="flowGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#38a9ff"/>
+              <stop offset="1" stop-color="#22d3ee"/>
+            </linearGradient>
+            <marker id="arrowHead" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+              <path d="M0,0 L8,4 L0,8 Z" fill="#22d3ee"/>
+            </marker>
+            <pattern id="enfoqueGrid" width="28" height="28" patternUnits="userSpaceOnUse">
+              <path d="M 28 0 L 0 0 0 28" fill="none" stroke="rgba(232,234,242,0.035)" stroke-width="1"/>
+            </pattern>
+          </defs>
+
+          <rect x="0" y="0" width="860" height="310" rx="18" fill="url(#enfoqueGrid)"/>
+
+          <!-- conectores -->
+          <line x1="430" y1="58" x2="430" y2="78" stroke="url(#flowGrad)" stroke-width="1.5"/>
+          <line x1="430" y1="144" x2="430" y2="164" stroke="url(#flowGrad)" stroke-width="1.5"/>
+          <line x1="85" y1="164" x2="775" y2="164" stroke="url(#flowGrad)" stroke-width="1.5"/>
+          <line x1="85" y1="164" x2="85" y2="188" stroke="url(#flowGrad)" stroke-width="1.5" marker-end="url(#arrowHead)"/>
+          <line x1="223" y1="164" x2="223" y2="188" stroke="url(#flowGrad)" stroke-width="1.5" marker-end="url(#arrowHead)"/>
+          <line x1="361" y1="164" x2="361" y2="188" stroke="url(#flowGrad)" stroke-width="1.5" marker-end="url(#arrowHead)"/>
+          <line x1="499" y1="164" x2="499" y2="188" stroke="url(#flowGrad)" stroke-width="1.5" marker-end="url(#arrowHead)"/>
+          <line x1="637" y1="164" x2="637" y2="188" stroke="url(#flowGrad)" stroke-width="1.5" marker-end="url(#arrowHead)"/>
+          <line x1="775" y1="164" x2="775" y2="188" stroke="url(#flowGrad)" stroke-width="1.5" marker-end="url(#arrowHead)"/>
+          <circle cx="85" cy="164" r="3" fill="#22d3ee"/>
+          <circle cx="223" cy="164" r="3" fill="#22d3ee"/>
+          <circle cx="361" cy="164" r="3" fill="#22d3ee"/>
+          <circle cx="499" cy="164" r="3" fill="#22d3ee"/>
+          <circle cx="637" cy="164" r="3" fill="#22d3ee"/>
+          <circle cx="775" cy="164" r="3" fill="#22d3ee"/>
+
+          <!-- mensaje entrante -->
+          <rect x="330" y="14" width="200" height="44" rx="10" fill="rgba(154,163,184,0.07)" stroke="#6b7488" stroke-width="1.2"/>
+          <text x="430" y="33" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="600" fill="#cdd3df">mensaje entrante</text>
+          <text x="430" y="47" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6b7488">WhatsApp · Telegram · Email</text>
+
+          <!-- orquestador -->
+          <rect x="298" y="76" width="264" height="68" rx="16" fill="rgba(56,169,255,0.10)" stroke="url(#flowGrad)" stroke-width="2"/>
+          <text x="430" y="104" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="17" font-weight="700" fill="#ffffff">orquestador</text>
+          <text x="430" y="122" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#9aa3b8">decide qué agente responde</text>
+
+          <!-- agentes -->
+          <g font-family="Space Grotesk, sans-serif">
+            <rect x="25" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
+            <text x="85" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
+            <text x="85" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Atención</text>
+
+            <rect x="163" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
+            <text x="223" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
+            <text x="223" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Ventas</text>
+
+            <rect x="301" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
+            <text x="361" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
+            <text x="361" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Cobranzas</text>
+
+            <rect x="439" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
+            <text x="499" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
+            <text x="499" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Backoffice</text>
+
+            <rect x="577" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
+            <text x="637" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
+            <text x="637" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Documentos</text>
+
+            <rect x="715" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
+            <text x="775" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
+            <text x="775" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Correo</text>
+          </g>
+        </svg>
+
+        <div class="enfoque-legend">
+          <div class="legend-item"><span class="legend-name">agente-atencion</span><span class="legend-desc">Consultas, FAQ, estado de cuenta</span></div>
+          <div class="legend-item"><span class="legend-name">agente-ventas</span><span class="legend-desc">Calificación de leads, cotización</span></div>
+          <div class="legend-item"><span class="legend-name">agente-cobranzas</span><span class="legend-desc">Reclamo de deuda + valida pago (OCR)</span></div>
+          <div class="legend-item"><span class="legend-name">agente-backoffice</span><span class="legend-desc">Carga a CRM / ERP</span></div>
+          <div class="legend-item"><span class="legend-name">agente-documentos</span><span class="legend-desc">RAG sobre manuales y PDFs</span></div>
+          <div class="legend-item"><span class="legend-name">agente-correo</span><span class="legend-desc">Clasifica y redacta borradores</span></div>
+        </div>
       </div>
     </div>
   </section>
