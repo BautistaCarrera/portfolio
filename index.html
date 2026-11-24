@@ -205,14 +205,6 @@
 </head>
 <body>
 
-<div id="intro-gate" class="intro-gate">
-  <div class="intro-gate-inner">
-    <p class="intro-gate-eyebrow">bautista.carrera()</p>
-    <h1 class="intro-gate-title">Entrar en <span class="gradient-text">silencio</span></h1>
-    <span class="btn btn-primary">Entrar →</span>
-  </div>
-</div>
-
 <header>
   <nav>
     <a href="#top" class="logo">bautista<span class="fn">.carrera()</span></a>
@@ -556,21 +548,6 @@
     resize(); initNodes();
     window.addEventListener('resize', function(){ resize(); initNodes(); });
     if (reduced) { step(); } else { requestAnimationFrame(step); }
-  })();
-
-  // Pantalla de intro "Entrar en silencio" — se cierra con cualquier click/tap o tecla
-  (function(){
-    var gate = document.getElementById('intro-gate');
-    if (!gate) return;
-    document.body.style.overflow = 'hidden';
-    function dismiss(){
-      gate.classList.add('hidden');
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', onKey);
-    }
-    function onKey(){ dismiss(); }
-    gate.addEventListener('click', dismiss);
-    window.addEventListener('keydown', onKey);
   })();
 </script>
 
