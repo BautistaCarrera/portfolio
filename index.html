@@ -60,8 +60,16 @@
   .nav-cta:hover{background:#242b3d;border-color:rgba(232,234,242,0.22);}
   @media (max-width:680px){ .nav-links{display:none;} }
 
-  .hero{padding:110px 0 90px;position:relative;overflow:hidden;}
-  #hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:0.5;pointer-events:none;}
+  .hero{
+    padding:110px 0 90px;position:relative;overflow:hidden;
+    background-image:
+      linear-gradient(rgba(232,234,242,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,234,242,0.04) 1px, transparent 1px);
+    background-size:56px 56px;
+    background-position:center -1px;
+  }
+  .hero::before{content:"";position:absolute;top:-160px;left:50%;transform:translateX(-50%);width:680px;height:440px;background:radial-gradient(ellipse at center, rgba(56,169,255,0.14), transparent 70%);pointer-events:none;z-index:0;}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, transparent 0%, var(--bg) 94%);pointer-events:none;z-index:0;}
   .hero .wrap{position:relative;z-index:1;}
   .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-secondary);border:1px solid var(--border-standard);background:rgba(16,19,29,0.7);padding:7px 14px;border-radius:9999px;margin-bottom:28px;}
   .eyebrow .pulse{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(74,222,128,.6);animation:pulse 2s infinite;}
@@ -169,14 +177,7 @@
   footer .foot-links a{font-size:12.5px;color:var(--text-quaternary);transition:color .15s;}
   footer .foot-links a:hover{color:var(--text-secondary);}
 
-  .orbit-wrap{position:relative;width:100%;max-width:440px;aspect-ratio:1;margin:48px auto 0;}
-  .orbit-lines{position:absolute;inset:0;width:100%;height:100%;}
-  .orbit-lines line{animation:orbit-dash 22s linear infinite;}
-  @keyframes orbit-dash{ to { stroke-dashoffset:-120; } }
-  .orbit-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:110px;height:110px;border-radius:50%;background:var(--bg-panel);border:1px solid var(--border-standard);display:flex;align-items:center;justify-content:center;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:var(--text-primary);z-index:2;box-shadow:0 0 40px rgba(56,169,255,0.18);}
-  .orbit-node{position:absolute;transform:translate(-50%,-50%);width:118px;padding:10px 12px;border-radius:14px;background:var(--bg-panel);border:1px solid var(--border-subtle);text-align:center;font-size:12px;color:var(--text-secondary);z-index:2;}
-  .orbit-node b{display:block;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;margin-bottom:2px;letter-spacing:0.3px;}
-  @media (max-width:480px){ .orbit-node{width:82px;font-size:10px;padding:7px 6px;} .orbit-node b{font-size:9px;} .orbit-center{width:84px;height:84px;font-size:9.5px;} }
+  .enfoque-arch{margin-top:40px;max-width:640px;font-size:13px;line-height:2.1;padding:26px 28px;}
 
   .about-grid{display:grid;grid-template-columns:1fr 300px;gap:48px;margin-top:0;align-items:start;}
   @media (max-width:860px){ .about-grid{grid-template-columns:1fr;} }
@@ -212,7 +213,6 @@
 <main id="top">
 
   <section class="hero">
-    <canvas id="hero-canvas"></canvas>
     <div class="wrap">
       <div class="eyebrow"><span class="pulse"></span> Disponible para trabajar — Remoto · Presencial · Híbrido</div>
       <h1>Bautista Carrera</h1>
@@ -232,23 +232,18 @@
       <div class="section-tag">— mi enfoque</div>
       <h2 class="section-title reveal">Un orquestador, varios agentes</h2>
       <p class="section-desc reveal">No armo un solo bot gigante que intenta hacer de todo. Diseño un orquestador central que delega en agentes especializados — cada uno con su propio prompt, su propio canal y su propia tarea — así un fallo en uno no tira abajo el resto.</p>
-      <div class="orbit-wrap reveal">
-        <svg class="orbit-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <defs><linearGradient id="orbit-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#38a9ff"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
-          <line x1="50" y1="50" x2="50" y2="8" stroke="url(#orbit-grad)" stroke-width="0.4" stroke-dasharray="2 3" opacity="0.55"/>
-          <line x1="50" y1="50" x2="86.4" y2="29" stroke="url(#orbit-grad)" stroke-width="0.4" stroke-dasharray="2 3" opacity="0.55"/>
-          <line x1="50" y1="50" x2="86.4" y2="71" stroke="url(#orbit-grad)" stroke-width="0.4" stroke-dasharray="2 3" opacity="0.55"/>
-          <line x1="50" y1="50" x2="50" y2="92" stroke="url(#orbit-grad)" stroke-width="0.4" stroke-dasharray="2 3" opacity="0.55"/>
-          <line x1="50" y1="50" x2="13.6" y2="71" stroke="url(#orbit-grad)" stroke-width="0.4" stroke-dasharray="2 3" opacity="0.55"/>
-          <line x1="50" y1="50" x2="13.6" y2="29" stroke="url(#orbit-grad)" stroke-width="0.4" stroke-dasharray="2 3" opacity="0.55"/>
-        </svg>
-        <div class="orbit-center">orquestador</div>
-        <div class="orbit-node" style="left:50%;top:8%;"><b>agente</b>Atención al cliente</div>
-        <div class="orbit-node" style="left:86.4%;top:29%;"><b>agente</b>Ventas</div>
-        <div class="orbit-node" style="left:86.4%;top:71%;"><b>agente</b>Cobranzas</div>
-        <div class="orbit-node" style="left:50%;top:92%;"><b>agente</b>Backoffice / CRM</div>
-        <div class="orbit-node" style="left:13.6%;top:71%;"><b>agente</b>Documentos (RAG)</div>
-        <div class="orbit-node" style="left:13.6%;top:29%;"><b>agente</b>Correo</div>
+      <div class="arch enfoque-arch reveal">
+<span class="chan">mensaje entrante</span> <span class="branch">(WhatsApp · Telegram · Email)</span>
+   │
+   ▼
+<span class="root">orquestador</span>  <span class="branch">— decide qué agente responde, según intención y canal</span>
+   │
+   <span class="branch">├─</span> <span class="agent">agente-atencion</span>     <span class="chan">consultas, FAQ, estado de cuenta</span>
+   <span class="branch">├─</span> <span class="agent">agente-ventas</span>       <span class="chan">calificación de leads, cotización</span>
+   <span class="branch">├─</span> <span class="agent">agente-cobranzas</span>    <span class="chan">reclamo de deuda + valida pago (OCR)</span>
+   <span class="branch">├─</span> <span class="agent">agente-backoffice</span>   <span class="chan">carga a CRM / ERP</span>
+   <span class="branch">├─</span> <span class="agent">agente-documentos</span>   <span class="chan">RAG sobre manuales y PDFs</span>
+   <span class="branch">└─</span> <span class="agent">agente-correo</span>       <span class="chan">clasifica y redacta borradores</span>
       </div>
     </div>
   </section>
@@ -487,59 +482,6 @@
     });
   }, {threshold:0.12});
   document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
-
-  // Fondo animado sutil: red de nodos conectados, estilo "agentes en red"
-  (function(){
-    var canvas = document.getElementById('hero-canvas');
-    if (!canvas) return;
-    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var ctx = canvas.getContext('2d');
-    var w, h, nodes;
-    function resize(){
-      var hero = canvas.parentElement;
-      w = canvas.width = hero.offsetWidth;
-      h = canvas.height = hero.offsetHeight;
-    }
-    function initNodes(){
-      var count = Math.min(36, Math.floor((w*h)/28000));
-      nodes = [];
-      for (var i=0;i<count;i++){
-        nodes.push({
-          x: Math.random()*w, y: Math.random()*h,
-          vx: (Math.random()-0.5)*0.18, vy: (Math.random()-0.5)*0.18
-        });
-      }
-    }
-    function step(){
-      ctx.clearRect(0,0,w,h);
-      for (var i=0;i<nodes.length;i++){
-        var n = nodes[i];
-        n.x += n.vx; n.y += n.vy;
-        if (n.x<0||n.x>w) n.vx*=-1;
-        if (n.y<0||n.y>h) n.vy*=-1;
-      }
-      for (var i=0;i<nodes.length;i++){
-        for (var j=i+1;j<nodes.length;j++){
-          var a=nodes[i], b=nodes[j];
-          var dx=a.x-b.x, dy=a.y-b.y;
-          var dist = Math.sqrt(dx*dx+dy*dy);
-          if (dist < 150){
-            ctx.strokeStyle = 'rgba(56,169,255,' + (0.14*(1-dist/150)) + ')';
-            ctx.lineWidth = 1;
-            ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
-          }
-        }
-      }
-      for (var i=0;i<nodes.length;i++){
-        ctx.fillStyle = 'rgba(34,211,238,0.5)';
-        ctx.beginPath(); ctx.arc(nodes[i].x, nodes[i].y, 1.6, 0, Math.PI*2); ctx.fill();
-      }
-      if (!reduced) requestAnimationFrame(step);
-    }
-    resize(); initNodes();
-    window.addEventListener('resize', function(){ resize(); initNodes(); });
-    if (reduced) { step(); } else { requestAnimationFrame(step); }
-  })();
 </script>
 
 </body>
