@@ -169,14 +169,55 @@
   footer .foot-links{display:flex;gap:20px;}
   footer .foot-links a{font-size:12.5px;color:var(--text-quaternary);transition:color .15s;}
   footer .foot-links a:hover{color:var(--text-secondary);}
+
+  .intro-gate{position:fixed;inset:0;z-index:999;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:pointer;transition:opacity .5s ease, visibility .5s ease;}
+  .intro-gate.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+  .intro-gate-inner{text-align:center;}
+  .intro-gate-eyebrow{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text-tertiary);margin-bottom:18px;}
+  .intro-gate-title{font-size:44px;font-weight:700;color:var(--text-primary);margin-bottom:32px;letter-spacing:-1px;}
+  .intro-gate .btn{pointer-events:none;}
+  @media (max-width:480px){ .intro-gate-title{font-size:30px;} }
+
+  .orbit-wrap{position:relative;width:100%;max-width:440px;aspect-ratio:1;margin:48px auto 0;}
+  .orbit-lines{position:absolute;inset:0;width:100%;height:100%;}
+  .orbit-lines line{animation:orbit-dash 22s linear infinite;}
+  @keyframes orbit-dash{ to { stroke-dashoffset:-120; } }
+  .orbit-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:110px;height:110px;border-radius:50%;background:var(--bg-panel);border:1px solid var(--border-standard);display:flex;align-items:center;justify-content:center;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:var(--text-primary);z-index:2;box-shadow:0 0 40px rgba(56,169,255,0.18);}
+  .orbit-node{position:absolute;transform:translate(-50%,-50%);width:118px;padding:10px 12px;border-radius:14px;background:var(--bg-panel);border:1px solid var(--border-subtle);text-align:center;font-size:12px;color:var(--text-secondary);z-index:2;}
+  .orbit-node b{display:block;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;margin-bottom:2px;letter-spacing:0.3px;}
+  @media (max-width:480px){ .orbit-node{width:82px;font-size:10px;padding:7px 6px;} .orbit-node b{font-size:9px;} .orbit-center{width:84px;height:84px;font-size:9.5px;} }
+
+  .about-grid{display:grid;grid-template-columns:1fr 300px;gap:48px;margin-top:0;align-items:start;}
+  @media (max-width:860px){ .about-grid{grid-template-columns:1fr;} }
+  .about-sidebar{display:flex;flex-direction:column;gap:18px;}
+  .sidebar-card{border:1px solid var(--border-standard);border-radius:16px;background:var(--bg-panel);padding:22px;}
+  .sidebar-card h4{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--blue);margin-bottom:14px;}
+  .sidebar-card .edu-title{font-size:13.5px;color:var(--text-primary);font-weight:500;}
+  .sidebar-card .edu-meta{font-size:12px;color:var(--text-tertiary);margin-top:2px;}
+  .sidebar-card .data-row{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border-subtle);}
+  .sidebar-card .data-row:last-child{border-bottom:none;}
+  .sidebar-card .data-row span:first-child{color:var(--text-tertiary);}
+  .sidebar-card .data-row span:last-child{color:var(--text-primary);font-weight:500;text-align:right;}
+  .course-list{margin-top:14px;padding-top:14px;border-top:1px solid var(--border-subtle);}
+  .course-list .course-item{font-size:12px;color:var(--text-tertiary);padding:4px 0;line-height:1.5;}
+  .course-list .course-item b{color:var(--text-secondary);font-weight:500;}
 </style>
 </head>
 <body>
+
+<div id="intro-gate" class="intro-gate">
+  <div class="intro-gate-inner">
+    <p class="intro-gate-eyebrow">bautista.carrera()</p>
+    <h1 class="intro-gate-title">Entrar en <span class="gradient-text">silencio</span></h1>
+    <span class="btn btn-primary">Entrar →</span>
+  </div>
+</div>
 
 <header>
   <nav>
     <a href="#top" class="logo">bautista<span class="fn">.carrera()</span></a>
     <div class="nav-links">
+      <a href="#enfoque">Enfoque</a>
       <a href="#proyectos">Proyectos</a>
       <a href="#stack">Stack</a>
       <a href="#sobre-mi">Sobre mí</a>
@@ -199,6 +240,32 @@
         <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
         <a href="#contacto" class="btn btn-ghost">Descargar CV</a>
         <a href="#contacto" class="btn btn-ghost">Escribime</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="enfoque">
+    <div class="wrap">
+      <div class="section-tag">— mi enfoque</div>
+      <h2 class="section-title reveal">Un orquestador, varios agentes</h2>
+      <p class="section-desc reveal">No armo un solo bot gigante que intenta hacer de todo. Diseño un orquestador central que delega en agentes especializados — cada uno con su propio prompt, su propio canal y su propia tarea — así un fallo en uno no tira abajo el resto.</p>
+      <div class="orbit-wrap reveal">
+        <svg class="orbit-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <defs><linearGradient id="orbit-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#38a9ff"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+          <line x1="50" y1="50" x2="50" y2="8" stroke="url(#orbit-grad)" stroke-width="0.4" stroke-dasharray="2 3" opacity="0.55"/>
+          <line x1="50" y1="50" x2="86.4" y2="29" stroke="url(#orbit-grad)" stroke-width="0.4" stroke-dasharray="2 3" opacity="0.55"/>
+          <line x1="50" y1="50" x2="86.4" y2="71" stroke="url(#orbit-grad)" stroke-width="0.4" stroke-dasharray="2 3" opacity="0.55"/>
+          <line x1="50" y1="50" x2="50" y2="92" stroke="url(#orbit-grad)" stroke-width="0.4" stroke-dasharray="2 3" opacity="0.55"/>
+          <line x1="50" y1="50" x2="13.6" y2="71" stroke="url(#orbit-grad)" stroke-width="0.4" stroke-dasharray="2 3" opacity="0.55"/>
+          <line x1="50" y1="50" x2="13.6" y2="29" stroke="url(#orbit-grad)" stroke-width="0.4" stroke-dasharray="2 3" opacity="0.55"/>
+        </svg>
+        <div class="orbit-center">orquestador</div>
+        <div class="orbit-node" style="left:50%;top:8%;"><b>agente</b>Atención al cliente</div>
+        <div class="orbit-node" style="left:86.4%;top:29%;"><b>agente</b>Ventas</div>
+        <div class="orbit-node" style="left:86.4%;top:71%;"><b>agente</b>Cobranzas</div>
+        <div class="orbit-node" style="left:50%;top:92%;"><b>agente</b>Backoffice / CRM</div>
+        <div class="orbit-node" style="left:13.6%;top:71%;"><b>agente</b>Documentos (RAG)</div>
+        <div class="orbit-node" style="left:13.6%;top:29%;"><b>agente</b>Correo</div>
       </div>
     </div>
   </section>
@@ -373,11 +440,34 @@
     <div class="wrap">
       <div class="section-tag">03 — quién soy</div>
       <h2 class="section-title reveal">Sobre mí</h2>
+      <div class="about-grid">
       <div class="about-text reveal">
-        <p>Soy <strong>Bautista Carrera</strong>, de Argentina. Durante un año y medio trabajé como Desarrollador IA en Hitofusion, construyendo agentes que reemplazan tareas que antes hacía una persona: atender WhatsApp, calificar leads, cobrar deuda, vaciar una bandeja de entrada saturada. No son demos — son sistemas que siguen corriendo en producción hoy.</p>
+        <p>Soy <strong>Bautista Carrera</strong>, de Rosario, Argentina. Durante un año y medio trabajé como Desarrollador IA en Hitofusion, construyendo agentes que reemplazan tareas que antes hacía una persona: atender WhatsApp, calificar leads, cobrar deuda, vaciar una bandeja de entrada saturada. No son demos — son sistemas que siguen corriendo en producción hoy.</p>
         <p>Mi trabajo ahí fue <strong>prompt engineering y desarrollo</strong>: convertir un problema de negocio en un agente (o equipo de agentes) que no inventa información, mantiene el tono correcto, y se integra a los canales reales que la empresa ya usa.</p>
         <p>Para mostrar cómo pienso la arquitectura completa de punta a punta — algo que en Hitofusion no era mi parte del trabajo — construí <strong>DocuMind</strong> por mi cuenta: un agente RAG real, con código público, y un historial honesto de cada bug que encontré mientras lo rompía a propósito.</p>
         <p>Busco trabajo como <strong>Agent Developer</strong> — freelance o en relación de dependencia, abierto a remoto, presencial o híbrido.</p>
+      </div>
+      <div class="about-sidebar">
+        <div class="sidebar-card reveal">
+          <h4>formación</h4>
+          <div class="edu-title">ISTEA — Tecnicatura en Ciencias de Datos e IA</div>
+          <div class="edu-meta">En curso</div>
+          <div class="course-list">
+            <div class="course-item"><b>EducaciónIT</b> — Introducción a Bases de Datos y SQL (18hs, 2025)</div>
+            <div class="course-item"><b>EducaciónIT</b> — Programación Orientada a Objetos con IA (12hs, 2025)</div>
+            <div class="course-item"><b>EducaciónIT</b> — Introducción a Java (18hs, 2025)</div>
+            <div class="course-item"><b>EducaciónIT</b> — Desarrollo Web con HTML (18hs, 2023)</div>
+            <div class="course-item"><b>EducaciónIT</b> — JavaScript desde cero (18hs, 2023)</div>
+            <div class="course-item"><b>EducaciónIT</b> — C# .NET para no programadores (18hs, 2023)</div>
+          </div>
+        </div>
+        <div class="sidebar-card reveal">
+          <h4>datos</h4>
+          <div class="data-row"><span>Ubicación</span><span>Rosario, Santa Fe</span></div>
+          <div class="data-row"><span>Español</span><span>Nativo</span></div>
+          <div class="data-row"><span>Inglés</span><span>Básico</span></div>
+        </div>
+      </div>
       </div>
     </div>
   </section>
@@ -466,6 +556,21 @@
     resize(); initNodes();
     window.addEventListener('resize', function(){ resize(); initNodes(); });
     if (reduced) { step(); } else { requestAnimationFrame(step); }
+  })();
+
+  // Pantalla de intro "Entrar en silencio" — se cierra con cualquier click/tap o tecla
+  (function(){
+    var gate = document.getElementById('intro-gate');
+    if (!gate) return;
+    document.body.style.overflow = 'hidden';
+    function dismiss(){
+      gate.classList.add('hidden');
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', onKey);
+    }
+    function onKey(){ dismiss(); }
+    gate.addEventListener('click', dismiss);
+    window.addEventListener('keydown', onKey);
   })();
 </script>
 
