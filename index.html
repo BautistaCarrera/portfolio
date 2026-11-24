@@ -6,7 +6,7 @@
 <title>Bautista Carrera — Agent Developer</title>
 <meta name="description" content="Agent Developer. Construyo sistemas de agentes de IA que atienden, venden y automatizan operaciones reales, en producción.">
 <meta property="og:title" content="Bautista Carrera — Agent Developer">
-<meta property="og:description" content="Construyo agentes de IA que trabajan en producción, no en una demo. 1.5 años en Hitofusion + DocuMind, un proyecto propio con 19 bugs reales documentados.">
+<meta property="og:description" content="Construyo agentes de IA que trabajan en producción, no en una demo. Un año y medio en Hitofusion + DocuMind, un proyecto propio con 19 bugs reales documentados.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0a0b'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='56' font-weight='700' fill='%23e8923e' text-anchor='middle'%3E&gt;_%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,8 +84,15 @@
   .sub-label::before{content:"// ";color:var(--text-quaternary);}
   .sub-title{font-size:24px;font-weight:600;letter-spacing:-0.4px;color:var(--text-primary);}
   .sub-desc{margin-top:12px;font-size:15px;color:var(--text-tertiary);max-width:600px;}
-  .proyectos-block{margin-top:60px;}
-  .proyectos-block:first-of-type{margin-top:44px;}
+  .proyectos-block{margin-top:64px;padding-top:56px;border-top:1px solid var(--border-subtle);}
+  .proyectos-block:first-of-type{margin-top:44px;padding-top:0;border-top:none;}
+
+  .experience-panel{margin-top:28px;border:1px solid var(--border-standard);border-radius:10px;background:var(--bg-panel);padding:36px;}
+  .experience-head{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;}
+  .experience-head h3{font-size:22px;font-weight:600;color:var(--text-primary);letter-spacing:-0.3px;}
+  .experience-badge{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--text-tertiary);background:rgba(255,255,255,0.03);border:1px solid var(--border-standard);padding:5px 10px;border-radius:4px;white-space:nowrap;}
+  .experience-meta{margin-top:6px;font-size:14px;color:var(--text-tertiary);}
+  .experience-desc{margin-top:16px;font-size:15.5px;color:var(--text-secondary);max-width:680px;line-height:1.7;}
 
   .featured-card{margin-top:28px;border:1px solid var(--border-standard);border-radius:10px;background:var(--bg-panel);padding:36px;}
   .featured-head{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;}
@@ -175,7 +182,7 @@
     <div class="wrap">
       <div class="eyebrow"><span class="pulse"></span> disponible_para_trabajar: true</div>
       <h1>Construyo agentes de IA que <span class="accent">trabajan en producción</span>, no en una demo.</h1>
-      <p class="lead">Agent Developer especializado en sistemas multiagente y orquestación de LLMs. 1.5 años construyendo agentes que atienden, venden y cobran para empresas reales — más un proyecto propio con el código, los diagramas y cada bug a la vista.</p>
+      <p class="lead">Agent Developer especializado en sistemas multiagente y orquestación de LLMs. Durante un año y medio construí agentes que atienden, venden y cobran para empresas reales — además de un proyecto propio con código público, diagramas de arquitectura y cada bug documentado a la vista.</p>
       <div class="hero-ctas">
         <a href="#documind" class="btn btn-primary">Ver DocuMind en acción →</a>
         <a href="#proyectos" class="btn btn-ghost">Casos de estudio</a>
@@ -187,10 +194,10 @@
     <div class="wrap">
       <div class="section-tag">lo que construí</div>
       <h2 class="section-title reveal">Proyectos</h2>
-      <p class="section-desc reveal">Un proyecto propio de punta a punta, y 4 casos reales de 1.5 años en producción en Hitofusion — anonimizados por confidencialidad del cliente, pero con arquitectura y rol reales.</p>
+      <p class="section-desc reveal">Dos cosas distintas: un proyecto personal construido de punta a punta, y mi experiencia profesional real en Hitofusion — anonimizada por confidencialidad del cliente, pero con arquitectura y rol verdaderos.</p>
 
       <div class="proyectos-block" id="documind">
-        <div class="sub-label">proyecto propio · código público</div>
+        <div class="sub-label">proyecto personal · código público</div>
         <h3 class="sub-title">DocuMind</h3>
         <p class="sub-desc">Un bot de Telegram que lee tus documentos y responde preguntas citando la fuente exacta — sin inventar, sin mezclar archivos, sin servidor con URL pública.</p>
 
@@ -243,15 +250,24 @@
       </div>
 
       <div class="proyectos-block" id="casos">
-        <div class="sub-label">1.5 años en producción</div>
-        <h3 class="sub-title">Casos de estudio</h3>
-        <p class="sub-desc">Proyectos construidos en Hitofusion (Odoo Gold Partner, Argentina). Anonimizados por confidencialidad del cliente — el problema, la arquitectura y mi rol son reales.</p>
+        <div class="sub-label">experiencia profesional</div>
+        <h3 class="sub-title">Casos de estudio en producción</h3>
+        <p class="sub-desc">4 sistemas que construí y mantuve en producción durante mi paso por Hitofusion. Anonimizados por confidencialidad del cliente — el problema, la arquitectura y mi rol en cada uno son reales.</p>
+
+        <div class="experience-panel reveal">
+          <div class="experience-head">
+            <h3>Hitofusion — Desarrollador IA</h3>
+            <span class="experience-badge">un año y medio</span>
+          </div>
+          <div class="experience-meta">Odoo Gold Partner · Argentina</div>
+          <p class="experience-desc">Parte de la célula de IA de la empresa, construyendo agentes que reemplazan tareas que antes hacía una persona: atender WhatsApp, calificar leads, cobrar deuda, vaciar una bandeja de entrada saturada. Mi trabajo fue prompt engineering y desarrollo — no relevamiento ni diseño de arquitectura, eso lo mostrás en DocuMind.</p>
+        </div>
 
       <div class="case-grid">
         <div class="case-card reveal">
           <div class="case-sector">rastreo_satelital</div>
           <h3>Equipo de agentes para atención, ventas y posventa</h3>
-          <p class="case-problem">Reemplacé tres roles de atención manual por WhatsApp —atención, ventas y posventa— por un equipo de agentes que además cubre marketplace las 24 horas, algo que ningún humano hacía de noche.</p>
+          <p class="case-problem">Reemplacé tres roles de atención manual por WhatsApp — atención, ventas y posventa — por un equipo de agentes que además cubre marketplace las 24 horas, algo que ningún humano hacía de noche.</p>
           <div class="arch"><span class="root">orquestador</span>
 <span class="branch">├─</span> <span class="agent">agente-atencion</span>  <span class="chan">→ WhatsApp, Telegram</span>
 <span class="branch">├─</span> <span class="agent">agente-ventas</span>    <span class="chan">→ WhatsApp</span>
@@ -331,7 +347,7 @@
       <div class="section-tag">quién soy</div>
       <h2 class="section-title reveal">Sobre mí</h2>
       <div class="about-text reveal">
-        <p>Soy <strong>Bautista Carrera</strong>, de Argentina. Durante 1.5 años trabajé como Desarrollador IA en Hitofusion, construyendo agentes que reemplazan tareas que antes hacía una persona: atender WhatsApp, calificar leads, cobrar deuda, vaciar una bandeja de entrada saturada. No son demos — son sistemas que siguen corriendo en producción hoy.</p>
+        <p>Soy <strong>Bautista Carrera</strong>, de Argentina. Durante un año y medio trabajé como Desarrollador IA en Hitofusion, construyendo agentes que reemplazan tareas que antes hacía una persona: atender WhatsApp, calificar leads, cobrar deuda, vaciar una bandeja de entrada saturada. No son demos — son sistemas que siguen corriendo en producción hoy.</p>
         <p>Mi trabajo ahí fue <strong>prompt engineering y desarrollo</strong>: convertir un problema de negocio en un agente (o equipo de agentes) que no inventa información, mantiene el tono correcto, y se integra a los canales reales que la empresa ya usa.</p>
         <p>Para mostrar cómo pienso la arquitectura completa de punta a punta — algo que en Hitofusion no era mi parte del trabajo — construí <strong>DocuMind</strong> por mi cuenta: un agente RAG real, con código público, y un historial honesto de cada bug que encontré mientras lo rompía a propósito.</p>
         <p>Busco trabajo como <strong>Agent Developer</strong> — freelance o en relación de dependencia, abierto a remoto, presencial o híbrido.</p>
