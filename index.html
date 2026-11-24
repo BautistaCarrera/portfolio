@@ -136,12 +136,13 @@
 
   .case-card .case-role{margin-top:16px;border-top:1px solid var(--border-subtle);padding-top:14px;}
 
-  .stack-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px;}
-  @media (max-width:800px){ .stack-grid{grid-template-columns:repeat(2,1fr);} }
-  .stack-group{border:1px solid var(--border-subtle);border-radius:16px;padding:20px;background:rgba(255,255,255,0.015);}
-  .stack-group h4{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--blue);margin-bottom:12px;}
+  .stack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px;}
+  @media (max-width:860px){ .stack-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .stack-grid{grid-template-columns:1fr;} }
+  .stack-group{border:1px solid var(--border-subtle);border-radius:16px;padding:22px;background:rgba(255,255,255,0.015);}
+  .stack-group h4{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;color:var(--blue);margin-bottom:14px;text-transform:uppercase;letter-spacing:0.3px;}
   .stack-group ul{list-style:none;}
-  .stack-group li{font-size:13.5px;color:var(--text-tertiary);padding:3px 0;}
+  .stack-group li{font-size:13.5px;color:var(--text-tertiary);padding:4px 0;line-height:1.5;}
 
   .about-text{margin-top:30px;font-size:16px;color:var(--text-secondary);max-width:660px;line-height:1.75;}
   .about-text p{margin-bottom:17px;}
@@ -431,23 +432,60 @@
   <section class="section" id="stack">
     <div class="wrap">
       <div class="section-tag">02 — herramientas</div>
-      <h2 class="section-title reveal">Stack</h2>
+      <h2 class="section-title reveal">Stack técnico</h2>
+      <p class="section-desc reveal">Herramientas y tecnologías con las que construyo y despliego agentes.</p>
       <div class="stack-grid">
         <div class="stack-group reveal">
-          <h4>lenguajes / runtime</h4>
-          <ul><li>Python</li><li>Node.js</li><li>Docker / Docker Swarm</li></ul>
+          <h4>IA, agentes & LLMs</h4>
+          <ul>
+            <li>Sistemas multi-agente</li>
+            <li>Arquitecturas con orquestador</li>
+            <li>RAG</li>
+            <li>Bases de datos vectoriales</li>
+            <li>Model Context Protocol (MCP)</li>
+            <li>Tool use / function calling</li>
+            <li>LLMs (Claude · GPT · Gemini · DeepSeek · Kimi)</li>
+          </ul>
         </div>
         <div class="stack-group reveal">
-          <h4>llms y agentes</h4>
-          <ul><li>Claude / Anthropic API</li><li>OpenAI API</li><li>Gemini API</li><li>OpenClaw</li><li>Claude Code</li></ul>
+          <h4>automatización & orquestación</h4>
+          <ul>
+            <li>Automatización de procesos</li>
+            <li>OpenClaw</li>
+            <li>n8n</li>
+            <li>Integraciones ERP / CRM</li>
+            <li>APIs & webhooks</li>
+          </ul>
         </div>
         <div class="stack-group reveal">
-          <h4>orquestación / datos</h4>
-          <ul><li>Sistemas multiagente</li><li>RAG (ChromaDB)</li><li>n8n</li><li>Composio</li></ul>
+          <h4>visión por computadora</h4>
+          <ul>
+            <li>Detección de objetos</li>
+            <li>OCR de documentos</li>
+            <li>Transcripción de audio</li>
+          </ul>
         </div>
         <div class="stack-group reveal">
-          <h4>canales / infra</h4>
-          <ul><li>WhatsApp API</li><li>Telegram API</li><li>Gmail</li><li>VPS propio</li></ul>
+          <h4>backend & frontend</h4>
+          <ul>
+            <li>Python</li>
+            <li>Node.js</li>
+            <li>APIs REST</li>
+            <li>PostgreSQL</li>
+            <li>Supabase</li>
+            <li>React</li>
+            <li>Next.js</li>
+          </ul>
+        </div>
+        <div class="stack-group reveal">
+          <h4>infraestructura, deploy & canales</h4>
+          <ul>
+            <li>Docker / Docker Swarm</li>
+            <li>Linux / VPS</li>
+            <li>WhatsApp API</li>
+            <li>Telegram API</li>
+            <li>Gmail</li>
+          </ul>
         </div>
       </div>
     </div>
