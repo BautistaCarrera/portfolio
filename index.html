@@ -67,15 +67,17 @@
   .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-secondary);border:1px solid var(--border-standard);background:rgba(16,19,29,0.7);padding:7px 14px;border-radius:9999px;margin-bottom:28px;}
   .eyebrow .pulse{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(74,222,128,.6);animation:pulse 2s infinite;}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(74,222,128,.5);}70%{box-shadow:0 0 0 6px rgba(74,222,128,0);}100%{box-shadow:0 0 0 0 rgba(74,222,128,0);}}
-  h1{font-size:60px;font-weight:600;line-height:1.08;letter-spacing:-1.6px;color:var(--text-primary);max-width:780px;}
-  .hero p.lead{margin-top:24px;font-size:18px;line-height:1.65;color:var(--text-tertiary);max-width:600px;}
+  h1{font-size:52px;font-weight:700;line-height:1.08;letter-spacing:-1.6px;color:var(--text-primary);max-width:780px;}
+  .hero-role{margin-top:10px;font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:600;background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero-specialties{margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--text-secondary);}
+  .hero p.lead{margin-top:24px;font-size:17px;line-height:1.65;color:var(--text-tertiary);max-width:600px;}
   .hero-ctas{display:flex;gap:12px;margin-top:38px;flex-wrap:wrap;}
   .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:12px;font-size:14px;font-weight:600;font-family:'Space Grotesk',sans-serif;transition:all .15s;}
   .btn-primary{background:var(--gradient);color:#05060a;}
   .btn-primary:hover{filter:brightness(1.1);}
   .btn-ghost{background:var(--bg-panel);border:1px solid var(--border-standard);color:var(--text-primary);}
   .btn-ghost:hover{background:var(--bg-elev);border-color:rgba(232,234,242,0.22);}
-  @media (max-width:680px){ h1{font-size:36px;} .hero p.lead{font-size:16px;} }
+  @media (max-width:680px){ h1{font-size:38px;} .hero-role{font-size:20px;} .hero p.lead{font-size:16px;} }
 
   .section{padding:84px 0;border-top:1px solid var(--border-subtle);}
   .section-tag{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--blue);margin-bottom:12px;}
@@ -188,12 +190,15 @@
   <section class="hero">
     <canvas id="hero-canvas"></canvas>
     <div class="wrap">
-      <div class="eyebrow"><span class="pulse"></span> Disponible para trabajar — Freelance · Relación de dependencia</div>
-      <h1>Construyo <span class="gradient-text">agentes de IA</span> que trabajan en producción, no en una demo.</h1>
-      <p class="lead">Agent Developer especializado en sistemas multiagente y orquestación de LLMs. Durante un año y medio construí agentes que atienden, venden y cobran para empresas reales — además de un proyecto propio con código público, diagramas de arquitectura y cada bug documentado a la vista.</p>
+      <div class="eyebrow"><span class="pulse"></span> Disponible para trabajar — Remoto · Presencial · Híbrido</div>
+      <h1>Bautista Carrera</h1>
+      <p class="hero-role">Agent Developer</p>
+      <p class="hero-specialties">Sistemas Multiagente · Orquestación de LLMs · Automatización de Procesos</p>
+      <p class="lead">Construyo agentes que automatizan procesos reales de empresas, integrados a las herramientas que ya usan. En Hitofusion mi foco fue <strong class="gradient-text">prompt engineering y desarrollo</strong>; para mostrar cómo pienso la arquitectura de punta a punta, construí <strong class="gradient-text">DocuMind</strong> por mi cuenta — relevamiento, arquitectura, desarrollo, testing y despliegue, todo documentado.</p>
       <div class="hero-ctas">
-        <a href="#documind" class="btn btn-primary">Ver DocuMind en acción →</a>
-        <a href="#proyectos" class="btn btn-ghost">Casos de estudio</a>
+        <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
+        <a href="#contacto" class="btn btn-ghost">Descargar CV</a>
+        <a href="#contacto" class="btn btn-ghost">Escribime</a>
       </div>
     </div>
   </section>
