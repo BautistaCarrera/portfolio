@@ -337,36 +337,14 @@
 
       <div class="featured-card reveal">
         <div class="featured-head">
-          <h3>Agente RAG de soporte documental</h3>
+          <h3>Responde preguntas sobre tus documentos, citando la fuente exacta</h3>
           <span class="live-badge">● bot activo ahora</span>
         </div>
         <p class="featured-desc">
           Le mandás uno o varios documentos (PDF, TXT, DOCX) por Telegram y le preguntás por chat normal.
           Responde citando de qué documento y qué página o sección sacó cada dato, nunca mezcla información
-          entre archivos distintos, y dice "no sé" en vez de inventar. Lo construí, lo rompí a propósito una
-          y otra vez durante 6 rondas de QA, y documenté cada falla real que encontré.
+          entre archivos distintos, y dice "no sé" en vez de inventar.
         </p>
-
-        <div class="bug-log">
-          <div class="bug-log-head"><span>testing.md</span><span><span class="count">19</span> bugs reales encontrados y corregidos</span></div>
-          <div class="bug-row">
-            <span class="tag-sev crit">CRÍTICO</span>
-            <div class="bug-text"><div class="t">Un solo upload pesado tumbaba el servidor para todos</div><div class="d">El endpoint de subida era async pero hacía trabajo de CPU 100% síncrono adentro — bloqueaba el event loop entero. 29s de bloqueo medido → 0.2s después del fix.</div></div>
-          </div>
-          <div class="bug-row">
-            <span class="tag-sev user">USUARIO</span>
-            <div class="bug-text"><div class="t">Un segundo documento pisaba al primero, en silencio</div><div class="d">Encontrado por un usuario real probando a mano, no por mi QA. Rediseñé el sistema para soportar varios documentos por chat sin mezclar sus datos.</div></div>
-          </div>
-          <div class="bug-row">
-            <span class="tag-sev user">USUARIO</span>
-            <div class="bug-text"><div class="t">La app parecía colgada y no lo estaba</div><div class="d">Sin timeout en la llamada al LLM + sin ningún indicador de carga en el chat. Un delay normal se sentía como un cuelgue.</div></div>
-          </div>
-          <div class="bug-row">
-            <span class="tag-sev crit">ESCALA</span>
-            <div class="bug-text"><div class="t">Con 10 documentos cargados, una pregunta de 3 temas perdía uno</div><div class="d">El dato correcto pasaba el umbral de relevancia pero quedaba fuera del top-4 de resultados. Medido con precisión y corregido.</div></div>
-          </div>
-          <div class="bug-log-foot">+ 15 más documentados con causa raíz en <a href="https://github.com/BautistaCarrera/docu-mind/blob/main/TESTING.md" target="_blank">TESTING.md →</a></div>
-        </div>
 
         <div class="tag-row">
           <span class="tag">python-telegram-bot</span>
@@ -378,7 +356,6 @@
         </div>
         <div class="featured-ctas">
           <a href="https://t.me/documind_ba_bot" target="_blank" class="btn btn-primary">Probarlo en Telegram →</a>
-          <a href="https://github.com/BautistaCarrera/docu-mind" target="_blank" class="btn btn-ghost">Ver código en GitHub</a>
         </div>
       </div>
       </div>
