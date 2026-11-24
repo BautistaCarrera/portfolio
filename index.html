@@ -169,20 +169,27 @@
   .legend-name{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--cyan);font-weight:600;}
   .legend-desc{font-size:13px;color:var(--text-tertiary);}
 
-  .about-grid{display:grid;grid-template-columns:1fr 300px;gap:48px;margin-top:0;align-items:start;}
-  @media (max-width:860px){ .about-grid{grid-template-columns:1fr;} }
-  .about-sidebar{display:flex;flex-direction:column;gap:18px;}
-  .sidebar-card{border:1px solid var(--border-standard);border-radius:16px;background:var(--bg-panel);padding:22px;}
-  .sidebar-card h4{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--blue);margin-bottom:14px;}
-  .sidebar-card .edu-title{font-size:13.5px;color:var(--text-primary);font-weight:500;}
-  .sidebar-card .edu-meta{font-size:12px;color:var(--text-tertiary);margin-top:2px;}
-  .sidebar-card .data-row{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border-subtle);}
-  .sidebar-card .data-row:last-child{border-bottom:none;}
-  .sidebar-card .data-row span:first-child{color:var(--text-tertiary);}
-  .sidebar-card .data-row span:last-child{color:var(--text-primary);font-weight:500;text-align:right;}
-  .course-list{margin-top:14px;padding-top:14px;border-top:1px solid var(--border-subtle);}
-  .course-list .course-item{font-size:12px;color:var(--text-tertiary);padding:4px 0;line-height:1.5;}
-  .course-list .course-item b{color:var(--text-secondary);font-weight:500;}
+  .edu-main{margin-top:40px;border:1px solid var(--border-standard);border-radius:20px;background:var(--bg-panel);padding:30px 34px;}
+  .edu-main-head{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
+  .edu-main-head h3{font-size:26px;font-weight:700;color:var(--text-primary);letter-spacing:-0.4px;}
+  .edu-badge{display:inline-flex;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--cyan);background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.25);padding:6px 12px;border-radius:9999px;white-space:nowrap;}
+
+  .cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px;}
+  @media (max-width:860px){ .cert-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .cert-grid{grid-template-columns:1fr;} }
+  .cert-card{display:block;border:1px solid var(--border-standard);border-radius:16px;background:var(--bg-panel);overflow:hidden;transition:border-color .2s;}
+  .cert-card:hover{border-color:rgba(56,169,255,0.4);}
+  .cert-thumb{aspect-ratio:4/3;overflow:hidden;background:#000;}
+  .cert-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+  .cert-info{padding:14px 16px;}
+  .cert-name{font-size:13.5px;font-weight:600;color:var(--text-primary);line-height:1.35;}
+  .cert-meta{margin-top:5px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-tertiary);}
+
+  .data-panel{margin-top:28px;border:1px solid var(--border-standard);border-radius:16px;background:var(--bg-panel);padding:22px 26px;max-width:420px;}
+  .data-row{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:9px 0;border-bottom:1px solid var(--border-subtle);}
+  .data-row:last-child{border-bottom:none;}
+  .data-row span:first-child{color:var(--text-tertiary);}
+  .data-row span:last-child{color:var(--text-primary);font-weight:500;text-align:right;}
 </style>
 </head>
 <body>
@@ -195,6 +202,7 @@
       <a href="#proyectos">Proyectos</a>
       <a href="#stack">Stack</a>
       <a href="#sobre-mi">Sobre mí</a>
+      <a href="#formacion">Formación</a>
     </div>
     <a href="#contacto" class="nav-cta">Contactar</a>
   </nav>
@@ -441,39 +449,82 @@
     <div class="wrap">
       <div class="section-tag">03 — quién soy</div>
       <h2 class="section-title reveal">Sobre mí</h2>
-      <div class="about-grid">
       <div class="about-text reveal">
         <p>Soy <strong>Bautista Carrera</strong>, de Rosario, Argentina. Hace un año y medio que trabajo como Desarrollador IA en Hitofusion, construyendo agentes que reemplazan tareas que antes hacía una persona.</p>
         <p>Mi trabajo ahí es <strong>prompt engineering y desarrollo</strong>: convertir un problema de negocio en un agente (o equipo de agentes) que no inventa información, mantiene el tono correcto, y se integra a los canales reales que la empresa ya usa.</p>
       </div>
-      <div class="about-sidebar">
-        <div class="sidebar-card reveal">
-          <h4>formación</h4>
-          <div class="edu-title">ISTEA — Tecnicatura en Ciencias de Datos e IA</div>
-          <div class="edu-meta">En curso</div>
-          <div class="course-list">
-            <div class="course-item"><b>EducaciónIT</b> — Introducción a Bases de Datos y SQL (18hs, 2025)</div>
-            <div class="course-item"><b>EducaciónIT</b> — Programación Orientada a Objetos con IA (12hs, 2025)</div>
-            <div class="course-item"><b>EducaciónIT</b> — Introducción a Java (18hs, 2025)</div>
-            <div class="course-item"><b>EducaciónIT</b> — Desarrollo Web con HTML (18hs, 2023)</div>
-            <div class="course-item"><b>EducaciónIT</b> — JavaScript desde cero (18hs, 2023)</div>
-            <div class="course-item"><b>EducaciónIT</b> — C# .NET para no programadores (18hs, 2023)</div>
-          </div>
-        </div>
-        <div class="sidebar-card reveal">
-          <h4>datos</h4>
-          <div class="data-row"><span>Ubicación</span><span>Rosario, Santa Fe</span></div>
-          <div class="data-row"><span>Español</span><span>Nativo</span></div>
-          <div class="data-row"><span>Inglés</span><span>Básico</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="formacion">
+    <div class="wrap">
+      <div class="section-tag">04 — formación</div>
+      <h2 class="section-title reveal">Formación</h2>
+      <p class="section-desc reveal">Estudio una tecnicatura en paralelo a trabajar, y voy sumando cursos puntuales para reforzar las bases.</p>
+
+      <div class="edu-main reveal">
+        <div class="edu-main-head">
+          <h3>ISTEA — Tecnicatura en Ciencias de Datos e IA</h3>
+          <span class="edu-badge">En curso</span>
         </div>
       </div>
+
+      <div class="cert-grid">
+        <a class="cert-card reveal" href="assets/certificados/sql.png" target="_blank">
+          <div class="cert-thumb"><img src="assets/certificados/sql.png" alt="Certificado: Introducción a Bases de Datos y SQL — EducaciónIT" loading="lazy"></div>
+          <div class="cert-info">
+            <div class="cert-name">Introducción a Bases de Datos y SQL</div>
+            <div class="cert-meta">EducaciónIT · 18hs · 2025</div>
+          </div>
+        </a>
+        <a class="cert-card reveal" href="assets/certificados/poo-ia.png" target="_blank">
+          <div class="cert-thumb"><img src="assets/certificados/poo-ia.png" alt="Certificado: Programación Orientada a Objetos con IA — EducaciónIT" loading="lazy"></div>
+          <div class="cert-info">
+            <div class="cert-name">Programación Orientada a Objetos con IA</div>
+            <div class="cert-meta">EducaciónIT · 12hs · 2025</div>
+          </div>
+        </a>
+        <a class="cert-card reveal" href="assets/certificados/java.png" target="_blank">
+          <div class="cert-thumb"><img src="assets/certificados/java.png" alt="Certificado: Introducción a Java — EducaciónIT" loading="lazy"></div>
+          <div class="cert-info">
+            <div class="cert-name">Introducción a Java</div>
+            <div class="cert-meta">EducaciónIT · 18hs · 2025</div>
+          </div>
+        </a>
+        <a class="cert-card reveal" href="assets/certificados/html.png" target="_blank">
+          <div class="cert-thumb"><img src="assets/certificados/html.png" alt="Certificado: Desarrollo Web con HTML — EducaciónIT" loading="lazy"></div>
+          <div class="cert-info">
+            <div class="cert-name">Desarrollo Web con HTML</div>
+            <div class="cert-meta">EducaciónIT · 18hs · 2023</div>
+          </div>
+        </a>
+        <a class="cert-card reveal" href="assets/certificados/javascript.png" target="_blank">
+          <div class="cert-thumb"><img src="assets/certificados/javascript.png" alt="Certificado: JavaScript desde cero — EducaciónIT" loading="lazy"></div>
+          <div class="cert-info">
+            <div class="cert-name">JavaScript desde cero</div>
+            <div class="cert-meta">EducaciónIT · 18hs · 2023</div>
+          </div>
+        </a>
+        <a class="cert-card reveal" href="assets/certificados/csharp.png" target="_blank">
+          <div class="cert-thumb"><img src="assets/certificados/csharp.png" alt="Certificado: C# .NET para no programadores — EducaciónIT" loading="lazy"></div>
+          <div class="cert-info">
+            <div class="cert-name">C# .NET para no programadores</div>
+            <div class="cert-meta">EducaciónIT · 18hs · 2023</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="data-panel reveal">
+        <div class="data-row"><span>Ubicación</span><span>Rosario, Santa Fe</span></div>
+        <div class="data-row"><span>Español</span><span>Nativo</span></div>
+        <div class="data-row"><span>Inglés</span><span>Básico</span></div>
       </div>
     </div>
   </section>
 
   <section class="contact-section" id="contacto">
     <div class="wrap">
-      <div class="section-tag reveal">04 — hablemos</div>
+      <div class="section-tag reveal">05 — hablemos</div>
       <h2 class="reveal">¿Construimos algo con <span class="gradient-text">IA</span>?</h2>
       <p class="reveal">Hablemos — freelance, relación de dependencia, remoto, presencial o híbrido.</p>
       <div class="contact-links reveal">
