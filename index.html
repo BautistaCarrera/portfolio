@@ -165,11 +165,14 @@
 
   .enfoque-diagram-wrap{margin-top:40px;border:1px solid var(--border-standard);border-radius:20px;background:var(--bg-panel);padding:28px 28px 8px;}
   .enfoque-svg{width:100%;height:auto;display:block;}
-  .enfoque-legend{display:grid;grid-template-columns:1fr 1fr;gap:4px 32px;margin-top:20px;border-top:1px solid var(--border-subtle);padding-top:4px;}
-  @media (max-width:680px){ .enfoque-legend{grid-template-columns:1fr;} }
-  .legend-item{display:flex;flex-direction:column;gap:2px;padding:12px 0;border-bottom:1px solid var(--border-subtle);}
-  .legend-name{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--cyan);font-weight:600;}
-  .legend-desc{font-size:13px;color:var(--text-tertiary);}
+  .enfoque-node{cursor:pointer;transform-box:fill-box;transform-origin:center;transition:transform .15s ease;}
+  .enfoque-node rect{transition:fill .15s ease, stroke-opacity .15s ease;}
+  .enfoque-node:hover, .enfoque-node.active{transform:translateY(-3px);}
+  .enfoque-node:hover rect, .enfoque-node.active rect{fill:rgba(34,211,238,0.16);stroke-opacity:1;}
+  .enfoque-detail{margin-top:22px;min-height:54px;border-top:1px solid var(--border-subtle);padding-top:18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .enfoque-detail-hint{font-size:13px;color:var(--text-quaternary);font-style:italic;}
+  .enfoque-detail-name{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--cyan);background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.25);padding:5px 12px;border-radius:9999px;}
+  .enfoque-detail-desc{font-size:14.5px;color:var(--text-secondary);}
 
   .edu-main{margin-top:40px;border:1px solid var(--border-standard);border-radius:20px;background:var(--bg-panel);padding:30px 34px;}
   .edu-main-head{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
@@ -284,39 +287,46 @@
 
           <!-- agentes -->
           <g font-family="Space Grotesk, sans-serif">
-            <rect x="25" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
-            <text x="85" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
-            <text x="85" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Atención</text>
+            <g class="enfoque-node" tabindex="0" data-name="agente-atencion" data-desc="Consultas, FAQ, estado de cuenta">
+              <rect x="25" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
+              <text x="85" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
+              <text x="85" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Atención</text>
+            </g>
 
-            <rect x="163" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
-            <text x="223" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
-            <text x="223" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Ventas</text>
+            <g class="enfoque-node" tabindex="0" data-name="agente-ventas" data-desc="Calificación de leads, cotización">
+              <rect x="163" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
+              <text x="223" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
+              <text x="223" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Ventas</text>
+            </g>
 
-            <rect x="301" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
-            <text x="361" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
-            <text x="361" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Cobranzas</text>
+            <g class="enfoque-node" tabindex="0" data-name="agente-cobranzas" data-desc="Reclamo de deuda + valida pago (OCR)">
+              <rect x="301" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
+              <text x="361" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
+              <text x="361" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Cobranzas</text>
+            </g>
 
-            <rect x="439" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
-            <text x="499" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
-            <text x="499" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Backoffice</text>
+            <g class="enfoque-node" tabindex="0" data-name="agente-backoffice" data-desc="Carga a CRM / ERP">
+              <rect x="439" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
+              <text x="499" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
+              <text x="499" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Backoffice</text>
+            </g>
 
-            <rect x="577" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
-            <text x="637" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
-            <text x="637" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Documentos</text>
+            <g class="enfoque-node" tabindex="0" data-name="agente-documentos" data-desc="RAG sobre manuales y PDFs">
+              <rect x="577" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
+              <text x="637" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
+              <text x="637" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Documentos</text>
+            </g>
 
-            <rect x="715" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
-            <text x="775" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
-            <text x="775" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Correo</text>
+            <g class="enfoque-node" tabindex="0" data-name="agente-correo" data-desc="Clasifica y redacta borradores">
+              <rect x="715" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
+              <text x="775" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
+              <text x="775" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Correo</text>
+            </g>
           </g>
         </svg>
 
-        <div class="enfoque-legend">
-          <div class="legend-item"><span class="legend-name">agente-atencion</span><span class="legend-desc">Consultas, FAQ, estado de cuenta</span></div>
-          <div class="legend-item"><span class="legend-name">agente-ventas</span><span class="legend-desc">Calificación de leads, cotización</span></div>
-          <div class="legend-item"><span class="legend-name">agente-cobranzas</span><span class="legend-desc">Reclamo de deuda + valida pago (OCR)</span></div>
-          <div class="legend-item"><span class="legend-name">agente-backoffice</span><span class="legend-desc">Carga a CRM / ERP</span></div>
-          <div class="legend-item"><span class="legend-name">agente-documentos</span><span class="legend-desc">RAG sobre manuales y PDFs</span></div>
-          <div class="legend-item"><span class="legend-name">agente-correo</span><span class="legend-desc">Clasifica y redacta borradores</span></div>
+        <div class="enfoque-detail" id="enfoqueDetail">
+          <span class="enfoque-detail-hint">↑ Tocá o pasá el mouse sobre un agente para ver qué hace</span>
         </div>
       </div>
     </div>
@@ -603,6 +613,28 @@
     });
     window.addEventListener('keydown', function(e){
       if (e.key === 'Escape') closeModal();
+    });
+  })();
+
+  // Diagrama interactivo de "Mi enfoque": hover/click muestra la funcion del agente
+  (function(){
+    var detail = document.getElementById('enfoqueDetail');
+    var nodes = document.querySelectorAll('.enfoque-node');
+    if (!detail || !nodes.length) return;
+    function show(node){
+      nodes.forEach(function(n){ n.classList.remove('active'); });
+      node.classList.add('active');
+      var name = node.getAttribute('data-name');
+      var desc = node.getAttribute('data-desc');
+      detail.innerHTML = '<span class="enfoque-detail-name">' + name + '</span><span class="enfoque-detail-desc">' + desc + '</span>';
+    }
+    nodes.forEach(function(node){
+      node.addEventListener('mouseenter', function(){ show(node); });
+      node.addEventListener('click', function(){ show(node); });
+      node.addEventListener('focus', function(){ show(node); });
+      node.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(node); }
+      });
     });
   })();
 </script>
