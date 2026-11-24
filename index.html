@@ -177,13 +177,21 @@
   .cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px;}
   @media (max-width:860px){ .cert-grid{grid-template-columns:repeat(2,1fr);} }
   @media (max-width:560px){ .cert-grid{grid-template-columns:1fr;} }
-  .cert-card{display:block;border:1px solid var(--border-standard);border-radius:16px;background:var(--bg-panel);overflow:hidden;transition:border-color .2s;}
+  .cert-card{display:block;width:100%;text-align:left;font-family:inherit;border:1px solid var(--border-standard);border-radius:16px;background:var(--bg-panel);overflow:hidden;cursor:pointer;transition:border-color .2s;}
   .cert-card:hover{border-color:rgba(56,169,255,0.4);}
   .cert-thumb{aspect-ratio:4/3;overflow:hidden;background:#000;}
   .cert-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
   .cert-info{padding:14px 16px;}
   .cert-name{font-size:13.5px;font-weight:600;color:var(--text-primary);line-height:1.35;}
   .cert-meta{margin-top:5px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-tertiary);}
+
+  .cert-modal{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;padding:32px;}
+  .cert-modal.open{display:flex;}
+  .cert-modal-backdrop{position:absolute;inset:0;background:rgba(5,6,10,0.85);backdrop-filter:blur(6px);}
+  .cert-modal-content{position:relative;width:100%;max-width:380px;}
+  .cert-modal-content img{width:100%;display:block;border-radius:12px;border:1px solid var(--border-standard);box-shadow:0 24px 60px rgba(0,0,0,0.5);}
+  .cert-modal-close{position:absolute;top:-16px;right:-16px;width:34px;height:34px;border-radius:50%;background:var(--bg-elev);border:1px solid var(--border-standard);color:var(--text-primary);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+  .cert-modal-close:hover{background:#242b3d;}
 
   .data-panel{margin-top:28px;border:1px solid var(--border-standard);border-radius:16px;background:var(--bg-panel);padding:22px 26px;max-width:420px;}
   .data-row{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:9px 0;border-bottom:1px solid var(--border-subtle);}
@@ -470,48 +478,48 @@
       </div>
 
       <div class="cert-grid">
-        <a class="cert-card reveal" href="assets/certificados/sql.png" target="_blank">
+        <button type="button" class="cert-card reveal" data-img="assets/certificados/sql.png" data-alt="Certificado: Introducción a Bases de Datos y SQL — EducaciónIT">
           <div class="cert-thumb"><img src="assets/certificados/sql.png" alt="Certificado: Introducción a Bases de Datos y SQL — EducaciónIT" loading="lazy"></div>
           <div class="cert-info">
             <div class="cert-name">Introducción a Bases de Datos y SQL</div>
             <div class="cert-meta">EducaciónIT · 18hs · 2025</div>
           </div>
-        </a>
-        <a class="cert-card reveal" href="assets/certificados/poo-ia.png" target="_blank">
+        </button>
+        <button type="button" class="cert-card reveal" data-img="assets/certificados/poo-ia.png" data-alt="Certificado: Programación Orientada a Objetos con IA — EducaciónIT">
           <div class="cert-thumb"><img src="assets/certificados/poo-ia.png" alt="Certificado: Programación Orientada a Objetos con IA — EducaciónIT" loading="lazy"></div>
           <div class="cert-info">
             <div class="cert-name">Programación Orientada a Objetos con IA</div>
             <div class="cert-meta">EducaciónIT · 12hs · 2025</div>
           </div>
-        </a>
-        <a class="cert-card reveal" href="assets/certificados/java.png" target="_blank">
+        </button>
+        <button type="button" class="cert-card reveal" data-img="assets/certificados/java.png" data-alt="Certificado: Introducción a Java — EducaciónIT">
           <div class="cert-thumb"><img src="assets/certificados/java.png" alt="Certificado: Introducción a Java — EducaciónIT" loading="lazy"></div>
           <div class="cert-info">
             <div class="cert-name">Introducción a Java</div>
             <div class="cert-meta">EducaciónIT · 18hs · 2025</div>
           </div>
-        </a>
-        <a class="cert-card reveal" href="assets/certificados/html.png" target="_blank">
+        </button>
+        <button type="button" class="cert-card reveal" data-img="assets/certificados/html.png" data-alt="Certificado: Desarrollo Web con HTML — EducaciónIT">
           <div class="cert-thumb"><img src="assets/certificados/html.png" alt="Certificado: Desarrollo Web con HTML — EducaciónIT" loading="lazy"></div>
           <div class="cert-info">
             <div class="cert-name">Desarrollo Web con HTML</div>
             <div class="cert-meta">EducaciónIT · 18hs · 2023</div>
           </div>
-        </a>
-        <a class="cert-card reveal" href="assets/certificados/javascript.png" target="_blank">
+        </button>
+        <button type="button" class="cert-card reveal" data-img="assets/certificados/javascript.png" data-alt="Certificado: JavaScript desde cero — EducaciónIT">
           <div class="cert-thumb"><img src="assets/certificados/javascript.png" alt="Certificado: JavaScript desde cero — EducaciónIT" loading="lazy"></div>
           <div class="cert-info">
             <div class="cert-name">JavaScript desde cero</div>
             <div class="cert-meta">EducaciónIT · 18hs · 2023</div>
           </div>
-        </a>
-        <a class="cert-card reveal" href="assets/certificados/csharp.png" target="_blank">
+        </button>
+        <button type="button" class="cert-card reveal" data-img="assets/certificados/csharp.png" data-alt="Certificado: C# .NET para no programadores — EducaciónIT">
           <div class="cert-thumb"><img src="assets/certificados/csharp.png" alt="Certificado: C# .NET para no programadores — EducaciónIT" loading="lazy"></div>
           <div class="cert-info">
             <div class="cert-name">C# .NET para no programadores</div>
             <div class="cert-meta">EducaciónIT · 18hs · 2023</div>
           </div>
-        </a>
+        </button>
       </div>
 
       <div class="data-panel reveal">
@@ -521,6 +529,14 @@
       </div>
     </div>
   </section>
+
+  <div id="cert-modal" class="cert-modal">
+    <div class="cert-modal-backdrop" data-close="1"></div>
+    <div class="cert-modal-content">
+      <button type="button" class="cert-modal-close" data-close="1" aria-label="Cerrar">✕</button>
+      <img id="cert-modal-img" src="" alt="">
+    </div>
+  </div>
 
   <section class="contact-section" id="contacto">
     <div class="wrap">
@@ -554,6 +570,35 @@
     });
   }, {threshold:0.12});
   document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  // Lightbox de certificados: abre la imagen en la misma pagina, a tamaño moderado
+  (function(){
+    var modal = document.getElementById('cert-modal');
+    var modalImg = document.getElementById('cert-modal-img');
+    if (!modal || !modalImg) return;
+    function openModal(src, alt){
+      modalImg.src = src;
+      modalImg.alt = alt || '';
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(){
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      modalImg.src = '';
+    }
+    document.querySelectorAll('.cert-card').forEach(function(card){
+      card.addEventListener('click', function(){
+        openModal(card.getAttribute('data-img'), card.getAttribute('data-alt'));
+      });
+    });
+    modal.querySelectorAll('[data-close]').forEach(function(el){
+      el.addEventListener('click', closeModal);
+    });
+    window.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') closeModal();
+    });
+  })();
 </script>
 
 </body>
