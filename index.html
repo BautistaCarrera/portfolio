@@ -135,9 +135,6 @@
   .arch .chan{color:var(--text-secondary);}
 
   .case-card .case-role{margin-top:16px;border-top:1px solid var(--border-subtle);padding-top:14px;}
-  .case-stack{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap;}
-  .case-stack span{font-size:10.5px;color:var(--text-quaternary);font-family:'JetBrains Mono',monospace;}
-  .case-stack span:not(:last-child)::after{content:" ·";color:var(--text-quaternary);}
 
   .stack-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px;}
   @media (max-width:800px){ .stack-grid{grid-template-columns:repeat(2,1fr);} }
@@ -338,7 +335,7 @@
       </div>
 
       <div class="proyectos-block" id="casos">
-        <div class="sub-label">experiencia profesional</div>
+        <div class="sub-label">con clientes reales, en Hitofusion</div>
         <h3 class="sub-title">Casos de estudio en producción</h3>
         <p class="sub-desc">4 sistemas que construí y mantuve en producción durante mi paso por Hitofusion. Anonimizados por confidencialidad del cliente — el problema, la arquitectura y mi rol en cada uno son reales.</p>
 
@@ -365,7 +362,6 @@
             <li>Integración a <b>WhatsApp, Telegram y marketplace</b></li>
             <li>Prompt engineering + testing manual con conversaciones reales para que <b>nunca inventen información</b></li>
           </ul>
-          <div class="case-stack"><span>Multi-LLM (Claude/GPT/Gemini)</span><span>OpenClaw</span><span>VPS/Docker</span></div>
         </div>
 
         <div class="case-card reveal">
@@ -380,7 +376,6 @@
             <li>Desarrollo de los 3 agentes (calificador, agenda, back-office) junto a <b>otro dev</b></li>
             <li>Extracción estructurada por prompts — los datos de Excel/PDF <b>no se mezclan ni se pierden</b> al pasar al CRM</li>
           </ul>
-          <div class="case-stack"><span>Multi-LLM</span><span>WhatsApp</span><span>Extracción estructurada</span></div>
         </div>
 
         <div class="case-card reveal">
@@ -397,7 +392,6 @@
             <li>Tono fiel al directivo, <b>sin inventar</b> nada</li>
             <li>El borrador siempre pasa por <b>aprobación humana</b> antes de enviarse</li>
           </ul>
-          <div class="case-stack"><span>OpenClaw</span><span>Python</span><span>Gmail (Composio)</span><span>Telegram</span></div>
         </div>
 
         <div class="case-card reveal">
@@ -412,7 +406,6 @@
             <li>Desarrollo del agente junto a <b>otro dev</b></li>
             <li>Verificación de que el comprobante (<b>OCR</b>) matchee contra la deuda real antes de registrar el pago</li>
           </ul>
-          <div class="case-stack"><span>Sistemas agénticos</span><span>WhatsApp</span><span>OCR</span><span>ERP (Odoo)</span></div>
         </div>
       </div>
       </div>
