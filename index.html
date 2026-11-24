@@ -76,9 +76,13 @@
 
   .section{padding:84px 0;border-top:1px solid var(--border-subtle);}
   .section-tag{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--accent);margin-bottom:12px;}
-  .section-tag::before{content:"// ";color:var(--text-quaternary);}
   .section-title{font-size:30px;font-weight:600;letter-spacing:-0.6px;color:var(--text-primary);max-width:600px;}
   .section-desc{margin-top:14px;font-size:15.5px;color:var(--text-tertiary);max-width:600px;}
+
+  .check-list{list-style:none;margin-top:16px;}
+  .check-list li{position:relative;padding-left:20px;padding-top:3px;padding-bottom:3px;font-size:13px;color:var(--text-secondary);line-height:1.55;}
+  .check-list li::before{content:"✓";position:absolute;left:0;top:3px;color:var(--green);font-weight:600;}
+  .check-list b{color:var(--text-primary);font-weight:600;}
 
   .sub-label{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:500;color:var(--accent);margin-bottom:10px;}
   .sub-label::before{content:"// ";color:var(--text-quaternary);}
@@ -150,6 +154,7 @@
   .about-text strong{color:var(--text-primary);font-weight:600;}
 
   .contact-section{text-align:center;padding:96px 0;}
+  .contact-section .section-tag{display:flex;justify-content:center;}
   .contact-section h2{font-size:34px;font-weight:600;color:var(--text-primary);letter-spacing:-0.7px;font-family:'Space Grotesk',sans-serif;}
   .contact-section p{margin-top:14px;font-size:16px;color:var(--text-tertiary);}
   .contact-links{display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap;}
@@ -192,7 +197,7 @@
 
   <section class="section" id="proyectos">
     <div class="wrap">
-      <div class="section-tag">lo que construí</div>
+      <div class="section-tag">01 — lo que construí</div>
       <h2 class="section-title reveal">Proyectos</h2>
       <p class="section-desc reveal">Dos cosas distintas: un proyecto personal construido de punta a punta, y mi experiencia profesional real en Hitofusion — anonimizada por confidencialidad del cliente, pero con arquitectura y rol verdaderos.</p>
 
@@ -272,7 +277,11 @@
 <span class="branch">├─</span> <span class="agent">agente-atencion</span>  <span class="chan">→ WhatsApp, Telegram</span>
 <span class="branch">├─</span> <span class="agent">agente-ventas</span>    <span class="chan">→ WhatsApp</span>
 <span class="branch">└─</span> <span class="agent">agente-posventa</span> <span class="chan">→ WhatsApp, Marketplace</span></div>
-          <div class="case-role"><b>Mi rol:</b> desarrollo de los 3 agentes junto a otro dev + integración a los 3 canales. Foco principal: prompt engineering y testing manual con conversaciones reales para que nunca inventen información.</div>
+          <ul class="case-role check-list">
+            <li>Desarrollo de los 3 agentes (atención, ventas, posventa) junto a <b>otro dev</b></li>
+            <li>Integración a <b>WhatsApp, Telegram y marketplace</b></li>
+            <li>Prompt engineering + testing manual con conversaciones reales para que <b>nunca inventen información</b></li>
+          </ul>
           <div class="case-stack"><span>Multi-LLM (Claude/GPT/Gemini)</span><span>OpenClaw</span><span>VPS/Docker</span></div>
         </div>
 
@@ -284,7 +293,10 @@
 <span class="branch">├─</span> <span class="agent">agente-calificador</span> <span class="chan">→ WhatsApp</span>
 <span class="branch">├─</span> <span class="agent">agente-agenda</span>      <span class="chan">→ Calendario</span>
 <span class="branch">└─</span> <span class="agent">agente-backoffice</span>  <span class="chan">→ Excel/PDF → CRM</span></div>
-          <div class="case-role"><b>Mi rol:</b> desarrollo de los 3 agentes junto a otro dev. Foco principal: extracción estructurada por prompts para que los datos de Excel/PDF no se mezclen ni se pierdan al pasar al CRM.</div>
+          <ul class="case-role check-list">
+            <li>Desarrollo de los 3 agentes (calificador, agenda, back-office) junto a <b>otro dev</b></li>
+            <li>Extracción estructurada por prompts — los datos de Excel/PDF <b>no se mezclan ni se pierden</b> al pasar al CRM</li>
+          </ul>
           <div class="case-stack"><span>Multi-LLM</span><span>WhatsApp</span><span>Extracción estructurada</span></div>
         </div>
 
@@ -297,7 +309,11 @@
    <span class="branch">├─</span> <span class="chan">clasifica + prioriza</span>
    <span class="branch">├─</span> <span class="chan">resume</span>
    <span class="branch">└─</span> <span class="chan">borrador → aprobación humana → Telegram</span></div>
-          <div class="case-role"><b>Mi rol:</b> construido 100% por mí, de punta a punta, sin pareja de desarrollo (a diferencia de los otros casos). El desafío fue un tono fiel al directivo sin inventar nada.</div>
+          <ul class="case-role check-list">
+            <li>Construido <b>100% por mí</b>, de punta a punta, sin pareja de desarrollo</li>
+            <li>Tono fiel al directivo, <b>sin inventar</b> nada</li>
+            <li>El borrador siempre pasa por <b>aprobación humana</b> antes de enviarse</li>
+          </ul>
           <div class="case-stack"><span>OpenClaw</span><span>Python</span><span>Gmail (Composio)</span><span>Telegram</span></div>
         </div>
 
@@ -309,7 +325,10 @@
 <span class="branch">└─</span> <span class="agent">agente-cobranza</span>
    <span class="branch">├─</span> <span class="chan">informa estado de cuenta ← ERP</span>
    <span class="branch">└─</span> <span class="chan">valida comprobante (OCR) → registra pago → ERP</span></div>
-          <div class="case-role"><b>Mi rol:</b> desarrollo del agente junto a otro dev. El desafío fue verificar que el comprobante (leído por OCR) matcheara realmente contra la deuda antes de registrar el pago.</div>
+          <ul class="case-role check-list">
+            <li>Desarrollo del agente junto a <b>otro dev</b></li>
+            <li>Verificación de que el comprobante (<b>OCR</b>) matchee contra la deuda real antes de registrar el pago</li>
+          </ul>
           <div class="case-stack"><span>Sistemas agénticos</span><span>WhatsApp</span><span>OCR</span><span>ERP (Odoo)</span></div>
         </div>
       </div>
@@ -319,7 +338,7 @@
 
   <section class="section" id="stack">
     <div class="wrap">
-      <div class="section-tag">herramientas</div>
+      <div class="section-tag">02 — herramientas</div>
       <h2 class="section-title reveal">Stack</h2>
       <div class="stack-grid">
         <div class="stack-group reveal">
@@ -344,7 +363,7 @@
 
   <section class="section" id="sobre-mi">
     <div class="wrap">
-      <div class="section-tag">quién soy</div>
+      <div class="section-tag">03 — quién soy</div>
       <h2 class="section-title reveal">Sobre mí</h2>
       <div class="about-text reveal">
         <p>Soy <strong>Bautista Carrera</strong>, de Argentina. Durante un año y medio trabajé como Desarrollador IA en Hitofusion, construyendo agentes que reemplazan tareas que antes hacía una persona: atender WhatsApp, calificar leads, cobrar deuda, vaciar una bandeja de entrada saturada. No son demos — son sistemas que siguen corriendo en producción hoy.</p>
@@ -357,6 +376,7 @@
 
   <section class="contact-section" id="contacto">
     <div class="wrap">
+      <div class="section-tag reveal">04 — hablemos</div>
       <h2 class="reveal">¿Tenés un problema para automatizar?</h2>
       <p class="reveal">Hablemos — freelance, relación de dependencia, remoto, presencial o híbrido.</p>
       <div class="contact-links reveal">
