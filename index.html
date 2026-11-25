@@ -8,7 +8,7 @@
 <meta property="og:title" content="Bautista Carrera — Desarrollador IA">
 <meta property="og:description" content="Desarrollador IA en Hitofusion. Sistemas multi-agente, RAG, automatización de procesos — con DocuMind, mi proyecto propio, como prueba de arquitectura de punta a punta.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%2305060a'/%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2338a9ff'/%3E%3Cstop offset='1' stop-color='%2322d3ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext x='50' y='68' font-family='monospace' font-size='52' font-weight='700' fill='url(%23g)' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%2305060a'/%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2338bdf8'/%3E%3Cstop offset='1' stop-color='%237dd3fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext x='50' y='68' font-family='monospace' font-size='52' font-weight='700' fill='url(%23g)' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -20,10 +20,10 @@
     --text-secondary:#9aa3b8;
     --text-tertiary:#6b7488;
     --text-quaternary:#454c5c;
-    --blue:#38a9ff;
-    --cyan:#22d3ee;
+    --blue:#38bdf8;
+    --cyan:#7dd3fc;
     --gradient:linear-gradient(100deg, var(--blue), var(--cyan));
-    --accent-dim:rgba(56,169,255,0.1);
+    --accent-dim:rgba(56,189,248,0.1);
     --border-subtle:rgba(232,234,242,0.06);
     --border-standard:rgba(232,234,242,0.12);
     --green:#4ade80;
@@ -68,7 +68,7 @@
     background-size:56px 56px;
     background-position:center -1px;
   }
-  .hero::before{content:"";position:absolute;top:-160px;left:50%;transform:translateX(-50%);width:680px;height:440px;background:radial-gradient(ellipse at center, rgba(56,169,255,0.14), transparent 70%);pointer-events:none;z-index:0;}
+  .hero::before{content:"";position:absolute;top:-160px;left:50%;transform:translateX(-50%);width:680px;height:440px;background:radial-gradient(ellipse at center, rgba(56,189,248,0.14), transparent 70%);pointer-events:none;z-index:0;}
   .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, transparent 0%, var(--bg) 94%);pointer-events:none;z-index:0;}
   .hero .wrap{position:relative;z-index:1;}
   .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-secondary);border:1px solid var(--border-standard);background:rgba(16,19,29,0.7);padding:7px 14px;border-radius:9999px;margin-bottom:28px;}
@@ -96,14 +96,14 @@
 
   .case-grid{display:flex;flex-direction:column;gap:20px;margin-top:44px;}
   .case-spread{display:grid;grid-template-columns:1fr 1.05fr;gap:0;border:1px solid var(--border-standard);border-radius:22px;background:var(--bg-panel);overflow:hidden;transition:border-color .2s;}
-  .case-spread:hover{border-color:rgba(56,169,255,0.4);}
+  .case-spread:hover{border-color:rgba(56,189,248,0.4);}
   @media (max-width:860px){ .case-spread{grid-template-columns:1fr;} }
   .case-spread-text{padding:36px;min-width:0;}
   .case-spread-diagram{padding:36px;background:rgba(0,0,0,0.22);display:flex;align-items:center;border-left:1px solid var(--border-subtle);min-width:0;}
   @media (max-width:860px){ .case-spread-diagram{border-left:none;border-top:1px solid var(--border-subtle);} }
   .case-spread-diagram .arch{margin-top:0;width:100%;}
   .case-sector{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--blue);}
-  .case-outcome{display:inline-block;margin-left:10px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--cyan);background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.25);padding:3px 10px;border-radius:9999px;vertical-align:middle;}
+  .case-outcome{display:inline-block;margin-left:10px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--cyan);background:rgba(125,211,252,0.08);border:1px solid rgba(125,211,252,0.25);padding:3px 10px;border-radius:9999px;vertical-align:middle;}
   .case-spread-text h3{font-size:24px;font-weight:700;color:var(--text-primary);margin-top:14px;letter-spacing:-0.3px;line-height:1.25;}
   .case-spread-text .case-problem{font-size:14.5px;color:var(--text-tertiary);margin-top:12px;line-height:1.6;}
 
@@ -145,22 +145,22 @@
   .enfoque-node{cursor:pointer;transform-box:fill-box;transform-origin:center;transition:transform .15s ease;}
   .enfoque-node rect{transition:fill .15s ease, stroke-opacity .15s ease;}
   .enfoque-node:hover, .enfoque-node.active{transform:translateY(-3px);}
-  .enfoque-node:hover rect, .enfoque-node.active rect{fill:rgba(34,211,238,0.16);stroke-opacity:1;}
+  .enfoque-node:hover rect, .enfoque-node.active rect{fill:rgba(125,211,252,0.16);stroke-opacity:1;}
   .enfoque-detail{margin-top:22px;min-height:54px;border-top:1px solid var(--border-subtle);padding-top:18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
   .enfoque-detail-hint{font-size:13px;color:var(--text-quaternary);font-style:italic;}
-  .enfoque-detail-name{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--cyan);background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.25);padding:5px 12px;border-radius:9999px;}
+  .enfoque-detail-name{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--cyan);background:rgba(125,211,252,0.08);border:1px solid rgba(125,211,252,0.25);padding:5px 12px;border-radius:9999px;}
   .enfoque-detail-desc{font-size:14.5px;color:var(--text-secondary);}
 
   .edu-main{margin-top:40px;border:1px solid var(--border-standard);border-radius:20px;background:var(--bg-panel);padding:30px 34px;}
   .edu-main-head{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
   .edu-main-head h3{font-size:26px;font-weight:700;color:var(--text-primary);letter-spacing:-0.4px;}
-  .edu-badge{display:inline-flex;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--cyan);background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.25);padding:6px 12px;border-radius:9999px;white-space:nowrap;}
+  .edu-badge{display:inline-flex;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--cyan);background:rgba(125,211,252,0.08);border:1px solid rgba(125,211,252,0.25);padding:6px 12px;border-radius:9999px;white-space:nowrap;}
 
   .cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px;}
   @media (max-width:860px){ .cert-grid{grid-template-columns:repeat(2,1fr);} }
   @media (max-width:560px){ .cert-grid{grid-template-columns:1fr;} }
   .cert-card{display:block;width:100%;text-align:left;font-family:inherit;border:1px solid var(--border-standard);border-radius:16px;background:var(--bg-panel);overflow:hidden;cursor:pointer;transition:border-color .2s;}
-  .cert-card:hover{border-color:rgba(56,169,255,0.4);}
+  .cert-card:hover{border-color:rgba(56,189,248,0.4);}
   .cert-thumb{aspect-ratio:1920/1483;overflow:hidden;background:#fff;}
   .cert-thumb img{width:100%;height:100%;object-fit:contain;display:block;}
   .cert-info{padding:14px 16px;}
@@ -223,11 +223,11 @@
         <svg class="enfoque-svg" viewBox="0 0 860 310" preserveAspectRatio="xMidYMin meet" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="flowGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#38a9ff"/>
-              <stop offset="1" stop-color="#22d3ee"/>
+              <stop offset="0" stop-color="#38bdf8"/>
+              <stop offset="1" stop-color="#7dd3fc"/>
             </linearGradient>
             <marker id="arrowHead" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
-              <path d="M0,0 L8,4 L0,8 Z" fill="#22d3ee"/>
+              <path d="M0,0 L8,4 L0,8 Z" fill="#7dd3fc"/>
             </marker>
             <pattern id="enfoqueGrid" width="28" height="28" patternUnits="userSpaceOnUse">
               <path d="M 28 0 L 0 0 0 28" fill="none" stroke="rgba(232,234,242,0.035)" stroke-width="1"/>
@@ -246,12 +246,12 @@
           <line x1="499" y1="164" x2="499" y2="188" stroke="url(#flowGrad)" stroke-width="1.5" marker-end="url(#arrowHead)"/>
           <line x1="637" y1="164" x2="637" y2="188" stroke="url(#flowGrad)" stroke-width="1.5" marker-end="url(#arrowHead)"/>
           <line x1="775" y1="164" x2="775" y2="188" stroke="url(#flowGrad)" stroke-width="1.5" marker-end="url(#arrowHead)"/>
-          <circle cx="85" cy="164" r="3" fill="#22d3ee"/>
-          <circle cx="223" cy="164" r="3" fill="#22d3ee"/>
-          <circle cx="361" cy="164" r="3" fill="#22d3ee"/>
-          <circle cx="499" cy="164" r="3" fill="#22d3ee"/>
-          <circle cx="637" cy="164" r="3" fill="#22d3ee"/>
-          <circle cx="775" cy="164" r="3" fill="#22d3ee"/>
+          <circle cx="85" cy="164" r="3" fill="#7dd3fc"/>
+          <circle cx="223" cy="164" r="3" fill="#7dd3fc"/>
+          <circle cx="361" cy="164" r="3" fill="#7dd3fc"/>
+          <circle cx="499" cy="164" r="3" fill="#7dd3fc"/>
+          <circle cx="637" cy="164" r="3" fill="#7dd3fc"/>
+          <circle cx="775" cy="164" r="3" fill="#7dd3fc"/>
 
           <!-- mensaje entrante -->
           <rect x="330" y="14" width="200" height="44" rx="10" fill="rgba(154,163,184,0.07)" stroke="#6b7488" stroke-width="1.2"/>
@@ -259,45 +259,45 @@
           <text x="430" y="47" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6b7488">WhatsApp · Telegram · Email</text>
 
           <!-- orquestador -->
-          <rect x="298" y="76" width="264" height="68" rx="16" fill="rgba(56,169,255,0.10)" stroke="url(#flowGrad)" stroke-width="2"/>
+          <rect x="298" y="76" width="264" height="68" rx="16" fill="rgba(56,189,248,0.10)" stroke="url(#flowGrad)" stroke-width="2"/>
           <text x="430" y="104" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="17" font-weight="700" fill="#ffffff">orquestador</text>
           <text x="430" y="122" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#9aa3b8">decide qué agente responde</text>
 
           <!-- agentes -->
           <g font-family="Space Grotesk, sans-serif">
             <g class="enfoque-node" tabindex="0" data-name="agente-atencion" data-desc="Consultas, FAQ, estado de cuenta">
-              <rect x="25" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
-              <text x="85" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
+              <rect x="25" y="188" width="120" height="92" rx="14" fill="rgba(125,211,252,0.06)" stroke="#7dd3fc" stroke-width="1.2" stroke-opacity="0.55"/>
+              <text x="85" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#7dd3fc">AGENTE</text>
               <text x="85" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Atención</text>
             </g>
 
             <g class="enfoque-node" tabindex="0" data-name="agente-ventas" data-desc="Calificación de leads, cotización">
-              <rect x="163" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
-              <text x="223" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
+              <rect x="163" y="188" width="120" height="92" rx="14" fill="rgba(125,211,252,0.06)" stroke="#7dd3fc" stroke-width="1.2" stroke-opacity="0.55"/>
+              <text x="223" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#7dd3fc">AGENTE</text>
               <text x="223" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Ventas</text>
             </g>
 
             <g class="enfoque-node" tabindex="0" data-name="agente-cobranzas" data-desc="Reclamo de deuda + valida pago (OCR)">
-              <rect x="301" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
-              <text x="361" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
+              <rect x="301" y="188" width="120" height="92" rx="14" fill="rgba(125,211,252,0.06)" stroke="#7dd3fc" stroke-width="1.2" stroke-opacity="0.55"/>
+              <text x="361" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#7dd3fc">AGENTE</text>
               <text x="361" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Cobranzas</text>
             </g>
 
             <g class="enfoque-node" tabindex="0" data-name="agente-backoffice" data-desc="Carga a CRM / ERP">
-              <rect x="439" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
-              <text x="499" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
+              <rect x="439" y="188" width="120" height="92" rx="14" fill="rgba(125,211,252,0.06)" stroke="#7dd3fc" stroke-width="1.2" stroke-opacity="0.55"/>
+              <text x="499" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#7dd3fc">AGENTE</text>
               <text x="499" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Backoffice</text>
             </g>
 
             <g class="enfoque-node" tabindex="0" data-name="agente-documentos" data-desc="RAG sobre manuales y PDFs">
-              <rect x="577" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
-              <text x="637" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
+              <rect x="577" y="188" width="120" height="92" rx="14" fill="rgba(125,211,252,0.06)" stroke="#7dd3fc" stroke-width="1.2" stroke-opacity="0.55"/>
+              <text x="637" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#7dd3fc">AGENTE</text>
               <text x="637" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Documentos</text>
             </g>
 
             <g class="enfoque-node" tabindex="0" data-name="agente-correo" data-desc="Clasifica y redacta borradores">
-              <rect x="715" y="188" width="120" height="92" rx="14" fill="rgba(34,211,238,0.06)" stroke="#22d3ee" stroke-width="1.2" stroke-opacity="0.55"/>
-              <text x="775" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#22d3ee">AGENTE</text>
+              <rect x="715" y="188" width="120" height="92" rx="14" fill="rgba(125,211,252,0.06)" stroke="#7dd3fc" stroke-width="1.2" stroke-opacity="0.55"/>
+              <text x="775" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.5" fill="#7dd3fc">AGENTE</text>
               <text x="775" y="245" text-anchor="middle" font-size="13.5" font-weight="700" fill="#e8eaf2">Correo</text>
             </g>
           </g>
